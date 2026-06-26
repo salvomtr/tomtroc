@@ -8,4 +8,3 @@ use App\Core\Router;
 $router = new Router();
 $router->run();
 
-var_dump(class_exists(TestController::class));
