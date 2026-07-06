@@ -12,6 +12,7 @@ class HomeController {
     }
 */
     //METODI -> funzioni della classe
+    
     public function index(): void {
         echo "Homepage de TomTroc";
     }
