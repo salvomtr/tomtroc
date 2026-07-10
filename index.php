@@ -13,6 +13,7 @@ $router = new Router();
 $routes = [
     '/' => [HomeController::class, 'index'],
     '/livres' => [BookController::class, 'index'],
+    '/livres/:id' => [BookController::class, 'show'],
     '/messages' => [MessageController::class, 'index'],
     '/user' => [UserController::class, 'index'],
 ];
