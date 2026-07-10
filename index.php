@@ -10,17 +10,13 @@ use App\Core\Router;
 
 $router = new Router();
 
-$routes = [
-    '/' => [HomeController::class, 'index'],
-    '/livres' => [BookController::class, 'index'],
-    '/livres/:id' => [BookController::class, 'show'],
-    '/messages' => [MessageController::class, 'index'],
-    '/user' => [UserController::class, 'index'],
-];
-
-foreach($routes as $url => $action) {
-    $router->add($url, $action);
-}
+// Scanne automatiquement les controllers pour trouver les routes
+$router->scan([
+    HomeController::class,
+    BookController::class,
+    MessageController::class,
+    UserController::class,
+]);
 
 $router->run();
 

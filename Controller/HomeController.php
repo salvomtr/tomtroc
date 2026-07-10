@@ -1,18 +1,11 @@
 <?php
 namespace App\Controller;
 
-class HomeController {
-/*
-    // PROPRIETÀ -> variabili della classe
-    private $name;
+use App\Core\Route;
 
-    //COSTRUTTORE -> eseguito quando si crea l'oggetto
-    public function __construct() {
-        $this->name = "TomTroc";
-    }
-*/
-    //METODI -> funzioni della classe
-    
+class HomeController {
+
+    #[Route('/')]
     public function index(): void {
         echo "Homepage de TomTroc";
     }

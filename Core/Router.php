@@ -14,6 +14,30 @@ class Router {
         $this->routes[$url] = $action;
     }
 
+
+    // Scanne les controlleurs et lit les attributs #[Route]
+    // pour construire automatiquement le tableau des routes
+    public function scan(array $controllers): void {
+        foreach($controllers as $controller) {
+            //Crée un objet ReflectionClass pour inspecter le controller
+            $reflection = new \ReflectionClass($controller);
+
+            //Recupere tous les methods du controller
+            foreach($reflection->getMethods() as $method) {
+                // Lit les attributs #[Route] sur chaque methode
+                $attributes = $method->getAttributes(Route::class);
+
+                foreach($attributes as $attribute) {
+                    //Cree une instance de Route pour recuperer le path
+                    $route = $attribute->newInstance();
+
+                    // Ajoute la route au tableau
+                    $this->add($route->path, [$controller, $method->getName()]);
+                }
+            }
+        }
+    }
+
     public function run(): void {
        $url = $_SERVER['REQUEST_URI'];
        $url = str_replace('/tomtroc', '', $url);
