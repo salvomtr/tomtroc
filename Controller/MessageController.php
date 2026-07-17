@@ -3,7 +3,7 @@ namespace App\Controller;
 
 use App\Core\Route;
 
-class MessageController {
+class MessageController extends AbstractController {
 
     #[Route('/messages')]
     public function index(): void {

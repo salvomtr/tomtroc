@@ -3,11 +3,13 @@ namespace App\Controller;
 
 use App\Core\Route;
 
-class HomeController {
+class HomeController extends AbstractController {
 
     #[Route('/')]
     public function index(): void {
-        echo "Homepage de TomTroc";
+        $this->render('test', [
+            'title' => 'Bienvenue sur TomTroc'
+        ]);
     }
 
 }

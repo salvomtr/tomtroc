@@ -3,15 +3,17 @@ namespace App\Controller;
 
 use App\Core\Route;
 
-class BookController {
+class BookController extends AbstractController {
 
     #[Route('/livres')]
     public function index(): void {
-        echo "Book";
+        $this->render('test.phtml', ['title' => 'page d\'accueil']);
     }
 
     #[Route('/livres/:id')]
     public function show(int $id): void {
         echo "Livre avec id: " . $id;
     }
+
 }
+

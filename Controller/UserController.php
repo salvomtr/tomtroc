@@ -3,7 +3,7 @@ namespace App\Controller;
 
 use App\Core\Route;
 
-class UserController {
+class UserController extends AbstractController {
 
     #[Route('/user')]
     public function index(): void {
