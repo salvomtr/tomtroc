@@ -11,5 +11,4 @@ class HomeController extends AbstractController {
             'title' => 'Bienvenue sur TomTroc'
         ]);
     }
-
 }

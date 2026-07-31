@@ -4,10 +4,11 @@ namespace App\Controller;
 use App\Core\Route;
 
 class BookController extends AbstractController {
+    
 
     #[Route('/livres')]
     public function index(): void {
-        $this->render('test.phtml', ['title' => 'page d\'accueil']);
+        $this->render('test', ['title' => 'page d\'accueil']);
     }
 
     #[Route('/livres/:id')]

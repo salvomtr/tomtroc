@@ -38,6 +38,29 @@ class Router {
         }
     }
 
+    // Scanne automatiquement le dossier Controller/ pour trouver tous les controllers
+    public function scanControllers(string $path): void {
+        //Recupere tous les fichers du dossier
+        $files = scandir($path);
+
+        $controllers = [];
+
+        foreach($files as $file) {
+            //Ignore . .. et AbstractController
+            if($file === '.' || $file === '..' || $file === 'AbstractController.php') {
+                continue;
+            }
+
+            //Convertit 'HomeController.php' -> 'App\Controller\HomeController'
+            $class = 'App\\Controller\\' . str_replace('.php', '', $file);
+
+            $controllers[] = $class;
+        }
+
+        // Utilise le methode scan() existante
+        $this->scan($controllers);
+    }
+
     public function run(): void {
        $url = $_SERVER['REQUEST_URI'];
        $url = str_replace('/tomtroc', '', $url);

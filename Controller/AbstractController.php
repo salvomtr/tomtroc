@@ -14,4 +14,9 @@ abstract class AbstractController {
         require $path;
 
     }
+
+    // Methode pour verifier si o est en mlethode POST (soumission de form)
+    protected function isPost(): bool { 
+        return $_SERVER["REQUEST_METHOD"] === 'POST';
+    }
 }
