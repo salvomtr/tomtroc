@@ -7,7 +7,7 @@ class MessageController extends AbstractController {
 
     #[Route('/messages')]
     public function index(): void {
-        $this->render('test', ['title' => 'Message' . $id]);
+        $this->render('test', ['title' => 'Message']);
     }
 
     #[Route('/messages/:id')]
