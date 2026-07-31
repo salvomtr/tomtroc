@@ -7,11 +7,11 @@ class MessageController extends AbstractController {
 
     #[Route('/messages')]
     public function index(): void {
-        echo "Message";
+        $this->render('test', ['title' => 'Message' . $id]);
     }
 
     #[Route('/messages/:id')]
     public function show(int $id): void {
-        echo "Message avec id: " . $id;
+        $this->render('test', ['title' => 'Message avec id: ' . $id]);
     }
 }

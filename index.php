@@ -3,6 +3,7 @@ require_once 'config/autoload.php';
 session_start();
 
 use App\Core\Router;
+use App\Core\Route;
 
 $router = new Router();
 

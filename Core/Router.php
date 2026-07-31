@@ -65,6 +65,7 @@ class Router {
        $url = $_SERVER['REQUEST_URI'];
        $url = str_replace('/tomtroc', '', $url);
 
+       
        //Boucle sur toutes les routes
        foreach($this->routes as $route => $action) {
             // Convertit :id en regex ([0-9]+)

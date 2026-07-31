@@ -13,7 +13,7 @@ class BookController extends AbstractController {
 
     #[Route('/livres/:id')]
     public function show(int $id): void {
-        echo "Livre avec id: " . $id;
+        $this->render('test', ['title' => 'Livre avec id: ' . $id]);
     }
 
 }

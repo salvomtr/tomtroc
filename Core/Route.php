@@ -5,7 +5,7 @@ use Attribute;
 
 //Declare que cette classe est un attribut php 8
 // Elle sera utilisée pour définir les routes directement sur les méthodes des controllers
-#[Attribute]
+#[Attribute(Attribute::TARGET_METHOD)]
 class Route {
 
     // Constructeur qui accepte le chemin de la route 

@@ -7,11 +7,11 @@ class UserController extends AbstractController {
 
     #[Route('/user')]
     public function index(): void {
-        echo "User";
+        $this->render('test', ['title' => 'User' . $id]);
     }
 
     #[Route('/user/:id')]
     public function show(int $id): void {
-        echo "Utilisateur avec id: " . $id;
+        $this->render('test', ['title' => 'User avec id: ' . $id]);
     }
 }
