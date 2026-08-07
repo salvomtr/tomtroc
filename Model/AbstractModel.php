@@ -28,4 +28,19 @@ abstract class AbstractModel {
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
+
+    //Insere un nouvel enregistrement dans la table
+    public function create(array $data): bool {
+        //Recupere les noms des colonnes 
+        $colonnes = implode(', ', array_keys($data));
+
+        // Crée les placeholders ?, ?, ?
+        $placeholders = implode(', ', array_fill(0, count($data), '?'));
+
+        $stmt = $this->pdo->prepare(
+            "INSERT INTO {$this->table} ($colonnes) VALUES ($placeholders)"
+        );
+
+        return $stmt->execute(array_values($data));
+    }
 }

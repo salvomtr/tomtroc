@@ -19,4 +19,9 @@ abstract class AbstractController {
     protected function isPost(): bool { 
         return $_SERVER["REQUEST_METHOD"] === 'POST';
     }
+
+    protected function redirect(string $url): void {
+        header("Location: $url");
+        exit;
+    }
 }
