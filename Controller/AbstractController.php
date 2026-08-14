@@ -24,4 +24,21 @@ abstract class AbstractController {
         header("Location: $url");
         exit;
     }
+
+    // Methode pour verifier si le user é connecté
+    protected function requireLogin(): void {
+        if(!$this->isLogged()) {
+            $this->redirect('/tomtroc/connexion');
+        }
+    }
+
+    // Vérifie si l'utilisateur est connecté
+    protected function isLogged(): bool {
+        return isset($_SESSION['user']);
+    }
+
+    // Récupère l'utilisateur connecté
+    protected function getUser(): array|null {
+        return $_SESSION['user'] ?? null;
+    }
 }

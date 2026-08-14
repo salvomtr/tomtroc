@@ -77,6 +77,8 @@ class UserController extends AbstractController {
 
     #[Route('/mon-compte')]
     public function monCompte(): void {
+        $this->requireLogin();
+
         $user = $this->getUser();
         $bookModel = new \App\Model\BookModel();
         $livres = $bookModel->findByUserId($user['id']);
