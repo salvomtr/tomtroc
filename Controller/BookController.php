@@ -8,12 +8,18 @@ class BookController extends AbstractController {
 
     #[Route('/livres')]
     public function index(): void {
-        $this->render('test', ['title' => 'page d\'accueil']);
+        $bookModel = new \App\Model\BookModel();
+        $livres = $bookModel->findAll();
+
+        $this->render('book/index', ['livres' => $livres]);
     }
 
     #[Route('/livres/:id')]
     public function show(int $id): void {
-        $this->render('test', ['title' => 'Livre avec id: ' . $id]);
+        $bookModel = new \App\Model\BookModel();
+        $livre = $bookModel->findById($id);
+
+        $this->render('book/show', ['livre' => $livre]);
     }
 
 }

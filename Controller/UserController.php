@@ -12,7 +12,12 @@ class UserController extends AbstractController {
 
     #[Route('/user/:id')]
     public function show(int $id): void {
-        $this->render('test', ['title' => 'User avec id: ' . $id]);
+        $userModel = new \App\Model\UserModel();
+        $user = $userModel->findById($id);
+        
+        $this->render('user/profile', [
+            'user' => $user
+        ]);
     }
 
     #[Route('/inscription')]
@@ -68,5 +73,23 @@ class UserController extends AbstractController {
             $this->render('user/login');
 
         }
+    }
+
+    #[Route('/mon-compte')]
+    public function monCompte(): void {
+        $user = $this->getUser();
+        $bookModel = new \App\Model\BookModel();
+        $livres = $bookModel->findByUserId($user['id']);
+        
+        $this->render('user/account', [
+            'user' => $user,
+            'livres' => $livres
+        ]);
+    }
+
+    #[Route('/deconnexion')]
+    public function logout(): void {
+        session_destroy();
+        $this->redirect('/tomtroc/');
     }
 }
