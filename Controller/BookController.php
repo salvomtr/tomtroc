@@ -19,7 +19,30 @@ class BookController extends AbstractController {
         $bookModel = new \App\Model\BookModel();
         $livre = $bookModel->findById($id);
 
-        $this->render('book/show', ['livre' => $livre]);
+        $this->render('book/show', [
+            'livre' => $livre,
+            'metaTitle' => $livre['titre'], 
+            ]);
+    }
+
+    #[Route('/livre/ajouter')]
+    public function add(): void {
+        $this->requireLogin();
+        
+        if($this->isPost()) {
+            $user = $this->getUser();
+            $bookModel = new \App\Model\BookModel();
+            $bookModel->create([
+                'titre' => $_POST['titre'],
+                'auteur' => $_POST['auteur'],
+                'description' => $_POST['description'],
+                'disponible' => isset($_POST['disponible']) ? 1 : 0,
+                'user_id' => $user['id'],
+            ]);
+            $this->redirect('/tomtroc/mon-compte');
+        } else {
+            $this->render('book/add');
+        }
     }
 
 }

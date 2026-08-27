@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes messages</title>
-</head>
-<body>
-    <h1>Mes messages</h1>
+<?php 
+/** @var array $messages */
+?>
+
+<h1>Mes messages</h1>
     <div>
         <?php foreach($messages as $message): ?>
             <div>
@@ -16,5 +12,3 @@
             </div>
         <?php endforeach; ?>
     </div>
-</body>
-</html>

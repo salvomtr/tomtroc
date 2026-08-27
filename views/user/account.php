@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Mon compte - TomTroc</title>
-</head>
-<body>
+<?php 
+/** @var array $user */
+/** @var array $livres */
+?>
     <h1>Mon compte</h1>
     
     <h2><?= $user['prenom'] ?> <?= $user['nom'] ?></h2>
@@ -25,6 +21,4 @@
     </div>
     
     <a href="/tomtroc/deconnexion">Se déconnecter</a>
-</body>
-</html>
 

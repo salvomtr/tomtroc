@@ -9,10 +9,15 @@ abstract class AbstractController {
 
         //Construit le chemin vers le fichier de vue, ex: 'home/index' -> '../view/home/index.php'
         $path = __DIR__ . '/../views/' . $view . '.php';
-
-        //Inclut le fichier de vue
+        
+        //Inclut le fichier de vue dans le buffer
+        ob_start();
         require $path;
+        $content = ob_get_clean();
 
+        //Inclut le layout
+        require __DIR__ . '/../views/layout.php';
+        
     }
 
     // Methode pour verifier si o est en mlethode POST (soumission de form)
@@ -41,4 +46,6 @@ abstract class AbstractController {
     protected function getUser(): array|null {
         return $_SESSION['user'] ?? null;
     }
+
+
 }
