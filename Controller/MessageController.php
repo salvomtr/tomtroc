@@ -5,6 +5,11 @@ use App\Core\Route;
 
 class MessageController extends AbstractController {
 
+    public function __construct()
+    {
+        $this->requireLogin();
+    }
+
     #[Route('/messages')]
     public function index(): void {
         $messageModel = new \App\Model\MessageModel();

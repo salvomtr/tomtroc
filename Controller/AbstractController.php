@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 abstract class AbstractController {
-
+    
     protected function render(string $view, array $data = []): void {
         // Extrait les variables du tableau $data, ex: ['titre' => 'TomTroc'] -> $titre = 'TomTroc'
         extract($data);
@@ -46,6 +46,4 @@ abstract class AbstractController {
     protected function getUser(): array|null {
         return $_SESSION['user'] ?? null;
     }
-
-
 }

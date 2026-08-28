@@ -1,4 +1,3 @@
-
     <h1>Connexion</h1>
     <form method="POST" action="/tomtroc/connexion">
         <label>Email</label>
