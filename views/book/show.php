@@ -7,6 +7,7 @@
     <p><strong>Description:</strong> <?= $livre['description'] ?></p>
     <p><strong>Disponible:</strong> <?= $livre['disponible'] ? 'Oui' : 'Non' ?></p>
     
+    
     <a href="/tomtroc/user/<?= $livre['user_id'] ?>">Voir le profil du propriétaire</a>
     <a href="/tomtroc/messages">Envoyer un message</a>
     

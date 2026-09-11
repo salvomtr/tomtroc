@@ -12,11 +12,12 @@ class BookModel extends AbstractModel {
     }
 
     public function findLastBooks(int $limit): array {
-        $stmt= $this->pdo->prepare(
-            "SELECT * FROM books ORDER BY id DESC LIMIT ?"
+        $stmt = $this->pdo->prepare(
+            "SELECT books.*, users.nom, users.prenom 
+            FROM books 
+            JOIN users ON books.user_id = users.id 
+            ORDER BY books.id DESC LIMIT ?"
         );
-        //$stmt = $this->pdo->prepare(
-        //"SELECT * FROM books ORDER BY id DESC LIMIT " . (int)$limit);
         $stmt->bindValue(1, $limit, \PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();

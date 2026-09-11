@@ -139,6 +139,163 @@ header a:hover {
     background-color: #2d7a52;
 }
 
+/* ==== DERNIERS LIVRES ==== */
+.derniers-livres {
+    background-color: white;
+    text-align: center;
+    padding: 60px 50px;
+    margin: 0 -50px;
+}
+
+.derniers-livres h2 {
+    margin-bottom: 120px;
+    margin-top: 90px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 42px;
+}
+
+.livres-grid {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.livre-card {
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    width: 300px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding-bottom: 15px;
+}
+
+.livre-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.livre-card h3 {
+    padding: 10px 10px 4px;
+    font-size: 20px;
+}
+
+.livre-card p {
+    padding: 10px 10px 20px;
+    font-size: 16px;
+    color: #888;
+}
+
+.livre-card .vendu-par {
+    font-size: 12px;
+    padding: 10 10px 15px;
+    font-style: italic;
+}
+
+/* ==== COMMENT CA MARCHE ==== */
+.comment-ca-marche {
+    text-align: center;
+    padding: 60px 50px;
+}
+
+.comment-ca-marche h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.comment-ca-marche > p {
+    max-width: 500px;
+    margin: 0 auto 40px;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.etapes {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.etape {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 20px;
+    width: 300px;
+    min-height: 150px;
+    font-size: 20px;
+    color: #555;
+}
+
+.btn-secondary {
+    display: inline-block;
+    background-color: transparent;
+    color: #3D9B6B;
+    border: 1px solid #3D9B6B;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-secondary:hover {
+    background-color: #3D9B6B;
+    color: white;
+}
+
+/* ==== BANNER ==== */
+.banner-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* ==== NOS VALEURS ==== */
+.nos-valeurs {
+    padding: 60px 50px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.nos-valeurs h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.nos-valeurs p {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.nos-valeurs .signature {
+    color: #aaa;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.signature-row {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.signature-row img {
+    width: 200px;
+    margin-left: 200px;
+}
+
 /* ==== FOOTER ==== */
 footer {
     display: flex;
