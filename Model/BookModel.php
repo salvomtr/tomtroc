@@ -22,4 +22,27 @@ class BookModel extends AbstractModel {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function findAllWithUser(): array {
+        $stmt = $this->pdo->query(
+            "SELECT books.*, users.nom, users.prenom 
+            FROM books 
+            JOIN users ON books.user_id = users.id
+            ORDER BY books.id DESC"
+        );
+        return $stmt->fetchAll();
+    }
+
+    public function search(string $search): array {
+        $stmt = $this->pdo->prepare(
+            "SELECT books.*, users.nom, users.prenom 
+            FROM books 
+            JOIN users ON books.user_id = users.id
+            WHERE books.titre LIKE ?
+            ORDER BY books.id DESC"
+        );
+        $stmt->execute(['%' . $search . '%']);
+        return $stmt->fetchAll();
+    }
+    
 }

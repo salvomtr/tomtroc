@@ -296,13 +296,36 @@ header a:hover {
     margin-left: 200px;
 }
 
-/* ==== FOOTER ==== */
-footer {
+/* ==== LIVRES HEADER ==== */
+.livres-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 40px;
+}
+
+.livres-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+}
+
+.livres-header input {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    width: 250px;
+}
+
+/* ==== FOOTER ==== */
+footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     padding: 20px 50px;
     border-top: 1px solid #ddd;
+    background-color: white;
+    gap: 30px;
 }
 
 footer nav {

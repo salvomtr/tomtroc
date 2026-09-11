@@ -9,9 +9,19 @@ class BookController extends AbstractController {
     #[Route('/livres')]
     public function index(): void {
         $bookModel = new \App\Model\BookModel();
-        $livres = $bookModel->findAll();
 
-        $this->render('book/index', ['livres' => $livres]);
+        $search =$_GET['search'] ?? '';
+
+        if($search) {
+            $livres = $bookModel->search($search);
+        } else {
+            $livres = $bookModel->findAllWithUser();
+        }
+
+        $this->render('book/index', [
+            'livres' => $livres,
+            'search' => $search
+        ]);
     }
 
     #[Route('/livres/:id')]

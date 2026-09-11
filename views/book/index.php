@@ -1,19 +1,21 @@
-<?php 
-/** @var array $livres */
-?>
-    
-    <h1>Nos livres à l'echange</h1>
- <form method="GET" action="/tomtroc/livres">
-        <input type="search" name="search" placeholder="Rechercher un livre...">
-        <button type="submit">Rechercher</button>
-    </form>
+<?php /** @var array $livres */ ?>
 
-    <div>
-        <?php foreach($livres as $livre): ?>
-            <div>
-                <h2><?= $livre['titre'] ?></h2>
+<div class="livres-header">
+    <h1>Nos livres à l'échange</h1>
+    <form method="GET" action="/tomtroc/livres">
+        <input type="search" name="search" placeholder="Rechercher un livre">
+    </form>
+</div>
+
+<div class="livres-grid">
+    <?php foreach($livres as $livre): ?>
+        <a href="/tomtroc/livres/<?= $livre['id'] ?>">
+            <div class="livre-card">
+                <img src="/tomtroc/public/img/<?= $livre['image'] ?>" alt="<?= $livre['titre'] ?>">
+                <h3><?= $livre['titre'] ?></h3>
                 <p><?= $livre['auteur'] ?></p>
-                <a href="/tomtroc/livres/<?= $livre['id'] ?>">Voir le détail</a>
+                <p class="vendu-par">Vendu par : <?= $livre['prenom'] ?? '' ?> <?= $livre['nom'] ?? '' ?></p>
             </div>
-        <?php endforeach; ?>
-    </div>
+        </a>
+    <?php endforeach; ?>
+</div>
