@@ -7,6 +7,11 @@ class HomeController extends AbstractController {
 
     #[Route('/')]
     public function index(): void {
-        $this->render('home/index');
+        $bookModel = new \App\Model\BookModel();
+        $derniers_livres = $bookModel->findLastBooks(4);
+
+        $this->render('home/index',[
+            'derniers_livres' => $derniers_livres
+        ]);
     }
 }

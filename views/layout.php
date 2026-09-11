@@ -8,12 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="header-left">
             <a href="/tomtroc/" class="logo">
-                <span class="logo-icon">TT</span>
+                <span class="logo-icon">
+                    <span class="logo-t1">T</span>
+                    <span class="logo-t2">T</span>
+                </span>
                 Tom Troc
             </a>
             <nav>
@@ -23,8 +28,14 @@
         </div>
 
         <div class="header-right">
-            <a href="./messages">Messagerie</a>
-            <a href="./mon-compte">Mon compte</a>
+            <a href="./messages">
+                <i class="fa-regular fa-comment"></i>
+                Messagerie
+            </a>
+            <a href="./mon-compte">
+                <i class="fa-regular fa-user"></i>
+                Mon compte
+            </a>
             <?php if(isset($_SESSION['user'])): ?>
                 <a href="./deconnexion">Déconnexion</a>
             <?php else: ?>

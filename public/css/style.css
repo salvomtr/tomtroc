@@ -25,10 +25,35 @@ a {
     color: inherit;
 }
 
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 100px;
+    gap: 90px;
+}
+
+.hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 50px;
+}
+
 .hero-text {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 30%;
+    font-size: 20px;
+}
+
+.hero-image img {
+    width: 80%;
+    height: auto;
+}
+
+.hero-image {
+    width: 50%;
 }
 
 /* ==== HEADER === */
@@ -59,14 +84,23 @@ header nav {
     gap: 30px;
 }
 
+header a:hover {
+    font-weight: bold;
+}
+
+.fa-comment {
+    transform: scaleX(-1);
+}
+
 /* ==== LOGO ==== */
 .logo {
+    color: #3D9B6B;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-weight: bold;
     font-size: 18px;
     font-weight: bold;
+    font-family: 'Playfair Display', serif;
 }
 
 .logo-icon {
@@ -74,8 +108,18 @@ header nav {
     color: white;
     padding: 8px 10px;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 18px;
+    font-family: 'Playfair Display', serif;
+    display: flex;
+    align-items: center;
+}
 
+.logo-t1{
+    transform: translateY(-3px);
+}
+
+.logo-t2{
+    transform: translateY(3px);
 }
 
 /* ==== BUTTON ==== */

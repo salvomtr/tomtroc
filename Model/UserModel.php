@@ -10,4 +10,5 @@ class UserModel extends AbstractModel {
         $stmt->execute([$email]);
         return $stmt->fetch();
     }
+
 }
