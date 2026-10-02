@@ -1,6 +1,7 @@
 <?php 
 /** @var array $user */
 /** @var array $livres */
+/** @var string BASE_URL */
 ?>
 
 <h1>Mon compte</h1>

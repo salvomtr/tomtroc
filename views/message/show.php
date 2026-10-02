@@ -1,7 +1,6 @@
-<?php 
-/** @var array $message */
+<?php /** @var array $message */?>
+<?php /** @var string BASE_URL */ ?>
 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,3 +1,5 @@
+<?php /** @var string BASE_URL */ ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

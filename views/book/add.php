@@ -1,3 +1,5 @@
+<?php /** @var string BASE_URL */ ?>
+
 <h1>Ajouter un livre</h1>
 
 <form method="POST" action="<?= BASE_URL ?>/livre/ajouter">

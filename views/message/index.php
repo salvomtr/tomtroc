@@ -1,3 +1,4 @@
+<?php /** @var string BASE_URL */ ?>
 <?php /** @var array $messages */ ?>
 
 <h1>Mes messages</h1>

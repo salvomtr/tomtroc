@@ -1,3 +1,4 @@
+<?php /** @var string BASE_URL */ ?>
 <?php /** @var array $user */ ?>
 
 <h1><?= $user['prenom'] ?> <?= $user['nom'] ?></h1>

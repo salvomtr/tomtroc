@@ -1,3 +1,4 @@
+<?php /** @var string BASE_URL */ ?>
 <?php /** @var array $livres */ ?>
 
 <div class="livres-header">

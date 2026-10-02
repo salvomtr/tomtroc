@@ -1,3 +1,5 @@
+<?php /** @var string BASE_URL */ ?>
+
 <h1>Inscription</h1>
 
 <form method="POST" action="<?= BASE_URL ?>/inscription">
