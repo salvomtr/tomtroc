@@ -5,13 +5,9 @@ use App\Core\Route;
 
 class MessageController extends AbstractController {
 
-    public function __construct()
-    {
-        $this->requireLogin();
-    }
-
     #[Route('/messages')]
     public function index(): void {
+        $this->requireLogin();
         $messageModel = new \App\Model\MessageModel();
         $messages = $messageModel->findAll();
         
@@ -22,6 +18,7 @@ class MessageController extends AbstractController {
 
     #[Route('/messages/:id')]
     public function show(int $id): void {
+        $this->requireLogin();
         $messageModel = new \App\Model\MessageModel();
         $message = $messageModel->findById($id);
         
@@ -29,5 +26,4 @@ class MessageController extends AbstractController {
             'message' => $message
         ]);
     }
-
 }

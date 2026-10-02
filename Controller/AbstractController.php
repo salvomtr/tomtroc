@@ -4,8 +4,11 @@ namespace App\Controller;
 abstract class AbstractController {
     
     protected function render(string $view, array $data = []): void {
+
+    $baseUrl = BASE_URL;
+
         // Extrait les variables du tableau $data, ex: ['titre' => 'TomTroc'] -> $titre = 'TomTroc'
-        extract($data);
+        extract($data); // rimpiazzare con metodo
 
         //Construit le chemin vers le fichier de vue, ex: 'home/index' -> '../view/home/index.php'
         $path = __DIR__ . '/../views/' . $view . '.php';
@@ -33,7 +36,7 @@ abstract class AbstractController {
     // Methode pour verifier si le user é connecté
     protected function requireLogin(): void {
         if(!$this->isLogged()) {
-            $this->redirect('/tomtroc/connexion');
+            $this->redirect('/connexion');
         }
     }
 

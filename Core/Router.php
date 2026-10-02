@@ -63,7 +63,6 @@ class Router {
 
     public function run(): void {
        $url = $_SERVER['REQUEST_URI'];
-       $url = str_replace('/tomtroc', '', $url);
        $url = strtok($url, '?'); // rimuove i parametri GET
 
        

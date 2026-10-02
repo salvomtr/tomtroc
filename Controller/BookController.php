@@ -8,6 +8,7 @@ class BookController extends AbstractController {
 
     #[Route('/livres')]
     public function index(): void {
+        
         $bookModel = new \App\Model\BookModel();
 
         $search =$_GET['search'] ?? '';
@@ -27,7 +28,7 @@ class BookController extends AbstractController {
     #[Route('/livres/:id')]
     public function show(int $id): void {
         $bookModel = new \App\Model\BookModel();
-        $livre = $bookModel->findById($id);
+        $livre = $bookModel->findByIdWithUser($id);
 
         $this->render('book/show', [
             'livre' => $livre,

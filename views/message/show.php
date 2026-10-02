@@ -14,6 +14,6 @@
     <p><?= $message['contenu'] ?></p>
     <p><?= $message['date_envoi'] ?></p>
     
-    <a href="/tomtroc/messages">Retour aux messages</a>
+    <a href="<?= BASE_URL ?>/messages">Retour aux messages</a>
 </body>
 </html>

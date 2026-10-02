@@ -16,6 +16,7 @@ if (!defined("DB_PASS")) {
 }
 
 function getDB(): PDO {
+
     $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
 
     return new PDO($dsn, DB_USER, DB_PASS, [

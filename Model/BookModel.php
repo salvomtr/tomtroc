@@ -44,5 +44,16 @@ class BookModel extends AbstractModel {
         $stmt->execute(['%' . $search . '%']);
         return $stmt->fetchAll();
     }
+
+    public function findByIdWithUser(int $id): array|false {
+        $stmt = $this->pdo->prepare(
+            "SELECT books.*, users.nom, users.prenom 
+            FROM books 
+            JOIN users ON books.user_id = users.id
+            WHERE books.id = ?"
+        );
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
     
 }
