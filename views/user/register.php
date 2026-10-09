@@ -1,22 +1,25 @@
 <?php /** @var string BASE_URL */ ?>
 
-<h1>Inscription</h1>
+<div class="auth-page">
+    <div class="auth-form">
+        <h1>Inscription</h1>
+        
+        <form method="POST" action="<?= BASE_URL ?>/inscription">
+            <label>Pseudo</label>
+            <input type="text" name="prenom" required>
 
-<form method="POST" action="<?= BASE_URL ?>/inscription">
-    <label>Nom</label>
-    <input type="text" name="nom" required>
+            <label>Adresse email</label>
+            <input type="email" name="email" required>
 
-    <label>Prénom</label>
-    <input type="text" name="prenom" required>
+            <label>Mot de passe</label>
+            <input type="password" name="password" required>
 
-    <label>Email</label>
-    <input type="email" name="email" required>
+            <button type="submit" class="btn-primary">S'inscrire</button>
+        </form>
 
-    <label>Mot de passe</label>
-    <input type="password" name="password" required>
-
-    <label>Date de naissance</label>
-    <input type="date" name="date_naissance" required>
-
-    <button type="submit">S'inscrire</button>
-</form>
+        <p>Déjà inscrit ? <a href="<?= BASE_URL ?>/connexion">Connectez-vous</a></p>
+    </div>
+    <div class="auth-image">
+        <img src="<?= BASE_URL ?>/public/img/auth.png" alt="Bibliothèque">
+    </div>
+</div>

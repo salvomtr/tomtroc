@@ -30,7 +30,7 @@ abstract class AbstractModel {
     }
 
     //Insere un nouvel enregistrement dans la table
-    public function create(array $data): bool {
+    public function create(array $data): bool {   //TODO verificare rischio injection sql
         //Recupere les noms des colonnes 
         $colonnes = implode(', ', array_keys($data));
 

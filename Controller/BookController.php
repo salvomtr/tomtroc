@@ -50,7 +50,7 @@ class BookController extends AbstractController {
                 'disponible' => isset($_POST['disponible']) ? 1 : 0,
                 'user_id' => $user['id'],
             ]);
-            $this->redirect('/tomtroc/mon-compte');
+            $this->redirect('/mon-compte');
         } else {
             $this->render('book/add');
         }

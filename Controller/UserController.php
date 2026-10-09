@@ -24,23 +24,20 @@ class UserController extends AbstractController {
     public function register(): void {
         if($this->isPost()) {
             // Recupere les données du formulaire
-            $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $email = $_POST['email'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $date_naissance = $_POST['date_naissance'];
+            
 
             //Sauvegarde dans la bdd
             $userModel = new \App\Model\UserModel();
             $userModel->create([
-                'nom' => $nom,
                 'prenom' => $prenom,
                 'email' => $email,
                 'password' => $password,
-                'date_naissance' => $date_naissance,
             ]);
 
-            $this->redirect("/tomtroc/connexion");
+            $this->redirect("/connexion");
 
         } else {
             $this->render('user/register');
@@ -63,7 +60,7 @@ class UserController extends AbstractController {
                 // Stocke l'utilisateur en session
                 $_SESSION['user'] = $user;
                 //Redirige vers la page d'accueil
-                $this->redirect('/tomtroc/');
+                $this->redirect('/');
             } else {
                 //Affiche le formulaire avec un message d'erreur
                 $this->render('user/login', ['error' => 'Email ou mot de passe incorrect']);
@@ -92,6 +89,6 @@ class UserController extends AbstractController {
     #[Route('/deconnexion')]
     public function logout(): void {
         session_destroy();
-        $this->redirect('/tomtroc/');
+        $this->redirect('/');
     }
 }

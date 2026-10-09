@@ -44,6 +44,13 @@
                 <a href="<?= BASE_URL ?>/connexion">Connexion</a>
             <?php endif; ?>
         </div>
+
+         <!-- Burger button -->
+            <button class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
     </header>
 
     <main>
@@ -60,5 +67,6 @@
             <span class="logo-icon">TT</span>
         </a>
     </footer>
+    <script src="<?= BASE_URL ?>/public/js/main.js"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@ class BookModel extends AbstractModel {
 
     public function findLastBooks(int $limit): array {
         $stmt = $this->pdo->prepare(
-            "SELECT books.*, users.nom, users.prenom 
+            "SELECT books.*, users.prenom 
             FROM books 
             JOIN users ON books.user_id = users.id 
             ORDER BY books.id DESC LIMIT ?"
