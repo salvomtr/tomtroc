@@ -637,6 +637,8 @@ footer nav a {
     .header-right.open {
         display: flex;
         flex-direction: column;
+        text-align: right;
+        align-items: flex-end;
         position: absolute;
         top: 100%;
         left: 0;
