@@ -637,8 +637,6 @@ footer nav a {
     .header-right.open {
         display: flex;
         flex-direction: column;
-        text-align: right;
-        align-items: flex-end;
         position: absolute;
         top: 100%;
         left: 0;
@@ -648,6 +646,8 @@ footer nav a {
         gap: 20px;
         border-top: 1px solid #ddd;
         z-index: 100;
+        text-align: right;
+        align-items: flex-end;
     }
 
     .burger {
@@ -663,55 +663,82 @@ footer nav a {
 
     .hero-text {
         width: 100%;
+        font-size: 16px;
+    }
+
+    .hero-text h1 {
+        font-size: 32px;
+        overflow-wrap: anywhere;
     }
 
     .hero-image {
         width: 100%;
     }
 
-    /* LIVRES GRID */
-    .livres-grid {
-        flex-wrap: wrap;
-        gap: 20px;
+    .btn-hero {
+        display: block;
+        width: 100%;
+        text-align: center;
     }
 
-    .livre-card {
-        width: calc(50% - 10px);
+    /* DERNIERS LIVRES */
+    .derniers-livres {
+        margin: 0 -15px;
+        padding: 35px 15px;
     }
 
-    /* ETAPES */
+    .derniers-livres h2,
+    .comment-ca-marche h2,
+    .nos-valeurs h2 {
+        font-size: 30px;
+        margin-top: 30px;
+        margin-bottom: 25px;
+    }
+
+    .livres-grid,
     .etapes {
-        flex-wrap: wrap;
-        gap: 20px;
+        flex-direction: column;
+        align-items: stretch;
     }
 
+    .livre-card,
     .etape {
-        width: calc(50% - 10px);
-    }
-
-    /* AUTH */
-    .auth-page {
-        flex-direction: column;
-        margin: -30px -20px;
-    }
-
-    .auth-form {
         width: 100%;
-        padding: 40px 20px;
+        max-width: 100%;
     }
 
-    .auth-image {
-        display: none;
+    /* COMMENT CA MARCHE */
+    .comment-ca-marche,
+    .nos-valeurs {
+        padding: 35px 0;
     }
 
-    /* MON COMPTE */
-    .compte-card {
+    .comment-ca-marche > p,
+    .nos-valeurs p {
+        font-size: 16px;
+    }
+
+    /* NOS VALEURS */
+    .signature-row {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .signature-row img {
+        margin-left: 0;
+    }
+
+    /* LIVRES */
+    .livres-header {
         flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
     }
 
-    .compte-profil {
-        flex: none;
+    .livres-header input {
         width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     /* LIVRE SHOW */
@@ -727,10 +754,66 @@ footer nav a {
         width: 100%;
     }
 
+    .livre-show-content h1 {
+        font-size: 28px;
+        overflow-wrap: anywhere;
+    }
+
+    /* MON COMPTE */
+    .compte-card {
+        flex-direction: column;
+    }
+
+    .compte-profil {
+        flex: none;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .compte-infos {
+        padding: 20px;
+    }
+
+    /* AUTH */
+    .auth-page {
+        flex-direction: column;
+        margin: -20px -15px;
+        min-height: auto;
+    }
+
+    .auth-form {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .auth-form input,
+    .auth-form .btn-primary {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .auth-image {
+        display: none;
+    }
+
+    /* TABLE */
+    .livres-table {
+        overflow-x: auto;
+    }
+
+    .livres-table table {
+        min-width: 560px;
+    }
+
     /* FOOTER */
     footer {
         flex-direction: column;
         padding: 20px;
         gap: 15px;
+    }
+
+    footer nav {
+        gap: 12px;
     }
 }
