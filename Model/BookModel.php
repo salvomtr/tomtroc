@@ -25,7 +25,7 @@ class BookModel extends AbstractModel {
 
     public function findAllWithUser(): array {
         $stmt = $this->pdo->query(
-            "SELECT books.*, users.nom, users.prenom 
+            "SELECT books.*, users.prenom 
             FROM books 
             JOIN users ON books.user_id = users.id
             ORDER BY books.id DESC"
@@ -35,7 +35,7 @@ class BookModel extends AbstractModel {
 
     public function search(string $search): array {
         $stmt = $this->pdo->prepare(
-            "SELECT books.*, users.nom, users.prenom 
+            "SELECT books.*, users.prenom 
             FROM books 
             JOIN users ON books.user_id = users.id
             WHERE books.titre LIKE ?
@@ -47,7 +47,7 @@ class BookModel extends AbstractModel {
 
     public function findByIdWithUser(int $id): array|false {
         $stmt = $this->pdo->prepare(
-            "SELECT books.*, users.nom, users.prenom 
+            "SELECT books.*, users.prenom 
             FROM books 
             JOIN users ON books.user_id = users.id
             WHERE books.id = ?"

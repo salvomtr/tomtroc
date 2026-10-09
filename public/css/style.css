@@ -189,8 +189,9 @@ header a:hover {
 }
 
 .livres-grid {
-    display: flex;
-    gap: 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px; 
     justify-content: center;
     margin-bottom: 40px;
 }
@@ -199,10 +200,11 @@ header a:hover {
     background-color: white;
     border-radius: 0 0 8px 8px;
     overflow: hidden;
-    width: 300px;
+    width: 100%; 
     text-align: left;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
+
 
 .livre-card img {
     width: 100%;
