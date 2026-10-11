@@ -761,17 +761,17 @@ footer nav a {
     font-size: 14px;
 }
 
-/* ==== RESPONSIVE: TABLET ==== */
-@media (max-width: 1024px) {
+/* === RESPONSIVE === */
+
+@media (max-width: 600px) {
 
     main {
         padding: 30px 20px;
     }
 
-    /* === HEADER ==== */
     header {
-        padding: 20px;
         position: relative;
+        padding: 20px;
     }
 
     .header-left nav,
@@ -781,30 +781,32 @@ footer nav a {
 
     .header-left nav.open,
     .header-right.open {
-        display: flex;
-        flex-direction: column;
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
-        background-color: #F5F0E8;
-        padding: 20px;
-        gap: 20px;
-        border-top: 1px solid #ddd;
         z-index: 100;
-        text-align: right;
+
+        display: flex;
+        flex-direction: column;
         align-items: flex-end;
+        gap: 20px;
+
+        padding: 20px;
+        background-color: #F5F0E8;
+        border-top: 1px solid #ddd;
+
+        text-align: right;
     }
 
     .burger {
         display: flex;
     }
 
-    /* === HERO === */
     .hero {
         flex-direction: column;
-        padding: 40px 0;
         gap: 30px;
+        padding: 40px 0;
     }
 
     .hero-text {
@@ -822,29 +824,52 @@ footer nav a {
     }
 
     .btn-hero {
-        display: block;
+        display: flex;
+        justify-content: center;
         width: 100%;
         text-align: center;
     }
 
-    /* === DERNIERS LIVRES === */
     .derniers-livres {
-        margin: 0 -20px;
+        margin-inline: -20px;
         padding: 35px 20px;
     }
 
     .derniers-livres h2,
     .comment-ca-marche h2,
     .nos-valeurs h2 {
-        font-size: 30px;
         margin-top: 30px;
         margin-bottom: 25px;
+        font-size: 30px;
     }
 
-    
     .livres-grid {
-        grid-template-columns: repeat(2, 1fr);
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 20px;
+    }
+
+    .livre-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .livre-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+    }
+
+
+    .comment-ca-marche,
+    .nos-valeurs {
+        padding: 35px 0;
+    }
+
+    .comment-ca-marche > p,
+    .nos-valeurs p {
+        font-size: 16px;
     }
 
     .etapes {
@@ -857,18 +882,7 @@ footer nav a {
         width: 100%;
     }
 
-    /* === COMMENT CA MARCHE / NOS VALEURS === */
-    .comment-ca-marche,
-    .nos-valeurs {
-        padding: 35px 0;
-    }
 
-    .comment-ca-marche > p,
-    .nos-valeurs p {
-        font-size: 16px;
-    }
-
-    /* === LIVRES === */
     .livres-header {
         flex-direction: column;
         align-items: stretch;
@@ -877,9 +891,10 @@ footer nav a {
 
     .livres-header input {
         width: 100%;
+        min-width: 0;
     }
 
-    /* === LIVRE SHOW === */
+
     .livre-show {
         flex-direction: column;
         gap: 30px;
@@ -888,6 +903,7 @@ footer nav a {
     .livre-show-image,
     .livre-show-content {
         width: 100%;
+        min-width: 0;
     }
 
     .livre-show-content h1 {
@@ -895,7 +911,7 @@ footer nav a {
         overflow-wrap: anywhere;
     }
 
-    /* === MON COMPTE === */
+
     .compte-card {
         flex-direction: column;
     }
@@ -910,29 +926,31 @@ footer nav a {
         padding: 20px;
     }
 
-    /* === AUTH === */
     .auth-page {
         flex-direction: column;
-        margin: -30px -20px; /* = padding di main su mobile */
+        margin: -30px -20px;
         min-height: auto;
     }
 
     .auth-form {
         width: 100%;
+        min-width: 0;
         padding: 30px 20px;
     }
 
     .auth-form input,
     .auth-form .btn-primary {
+        width: 100%;
         max-width: 100%;
+        box-sizing: border-box;
     }
 
     .auth-image {
         display: none;
     }
 
-    /* === TABLE === */
     .livres-table {
+        max-width: 100%;
         overflow-x: auto;
     }
 
@@ -940,29 +958,32 @@ footer nav a {
         min-width: 560px;
     }
 
-    /* === MESSAGERIE === */    
-
     .messagerie {
         flex-direction: column;
+        min-width: 0;
     }
-        
+
     .messagerie-liste {
         flex: none;
+        width: 100%;
+        min-width: 0;
     }
 
     .messagerie-conversation {
+        width: 100%;
+        min-width: 0;
         padding: 20px 0;
     }
 
     .message {
         max-width: 85%;
+        overflow-wrap: anywhere;
     }
-    
-    /* === FOOTER === */
+
     footer {
         flex-direction: column;
-        padding: 20px;
         gap: 15px;
+        padding: 20px;
     }
 
     footer nav {
@@ -972,19 +993,3 @@ footer nav a {
     }
 
 }
-
-/* ==== RESPONSIVE: MOBILE ==== */
-@media (max-width: 600px) {
-
-    .livres-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .signature-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-}
-
-
