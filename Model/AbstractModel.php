@@ -59,4 +59,10 @@ abstract class AbstractModel {
 
         return $stmt->execute($valeurs);
     }
+
+    // Supprime un enregistrement par son id
+    public function delete(int $id): bool {
+        $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
 }

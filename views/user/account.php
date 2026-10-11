@@ -63,7 +63,9 @@
                 </td>
                 <td>
                     <a href="<?= BASE_URL ?>/livre/editer/<?= $livre['id'] ?>">Éditer</a>
-                    <a href="<?= BASE_URL ?>/livre/supprimer/<?= $livre['id'] ?>">Supprimer</a>
+                    <a href="<?= BASE_URL ?>/livre/supprimer/<?= $livre['id'] ?>"
+                        onclick="return confirm('Etes-vous sur de vouloir supprimer ce livre ?');">Supprimer
+                    </a>
                 </td>
             </tr>
             <?php endforeach; ?>

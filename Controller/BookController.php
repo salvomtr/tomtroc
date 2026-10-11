@@ -56,5 +56,34 @@ class BookController extends AbstractController {
             $this->render('book/add');
         }
     }
+
+    // Recupere un livre et verifie qu'il appartient a l'utilisateur connecté
+    private function getLivreDuProprietaire(int $id): array {
+        $bookModel = new \App\Model\BookModel();
+        $livre = $bookModel->findById($id);
+        $user = $this->getUser();
+
+        if (!$livre || $livre['user_id'] != $user['id']) {
+            $this->redirect('/mon-compte');
+        }
+
+        return $livre;
+    }
+
+    #[Route('/livre/supprimer/:id')]
+    public function delete(int $id): void {
+        // L'utilisateur doit etre connecté
+        $this->requireLogin();
+
+        //Verifie que le livre existe et appartient a l'utilisateur
+        $this->getLivreDuProprietaire($id);
+
+        //Supprime le livre
+        $bookModel = new \App\Model\BookModel();
+        $bookModel->delete($id);
+
+        //Retour sur Mon Compte
+        $this->redirect('/mon-compte');
+    }
 }
 
