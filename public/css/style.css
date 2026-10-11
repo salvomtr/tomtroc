@@ -5,12 +5,24 @@
     box-sizing: border-box;
 }
 
+img {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
 /* ==== GENERAL ==== */
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: Inter, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: #F5F0E8;
     color: #2C2C2C;
 }
@@ -52,8 +64,9 @@ header nav {
     gap: 30px;
 }
 
+/* cambio colore invece del grassetto: il bold allarga il testo e fa "saltare" il menu */
 header a:hover {
-    font-weight: bold;
+    color: #3D9B6B;
 }
 
 .fa-comment {
@@ -94,7 +107,6 @@ header a:hover {
     padding: 8px 10px;
     border-radius: 8px;
     font-size: 18px;
-    font-family: 'Playfair Display', serif;
     display: flex;
     align-items: center;
 }
@@ -118,6 +130,7 @@ header a:hover {
     border: none;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.2s;
 }
 
 .btn-primary:hover {
@@ -126,6 +139,7 @@ header a:hover {
 
 .btn-secondary {
     display: inline-block;
+    width: fit-content;
     background-color: transparent;
     color: #3D9B6B;
     border: 1px solid #3D9B6B;
@@ -133,6 +147,7 @@ header a:hover {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .btn-secondary:hover {
@@ -149,12 +164,6 @@ header a:hover {
     gap: 90px;
 }
 
-.hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
-    font-size: 50px;
-}
-
 .hero-text {
     display: flex;
     flex-direction: column;
@@ -163,13 +172,19 @@ header a:hover {
     font-size: 20px;
 }
 
-.hero-image img {
-    width: 100%;
-    height: auto;
+.hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 50px;
 }
 
 .hero-image {
     width: 50%;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
 }
 
 /* ==== DERNIERS LIVRES ==== */
@@ -177,12 +192,12 @@ header a:hover {
     background-color: white;
     text-align: center;
     padding: 60px 50px;
-    margin: 0 -50px;
+    margin: 0 -50px; /* compensa il padding di main */
 }
 
 .derniers-livres h2 {
-    margin-bottom: 120px;
     margin-top: 90px;
+    margin-bottom: 120px;
     font-family: 'Playfair Display', serif;
     font-weight: 400;
     font-size: 42px;
@@ -190,9 +205,8 @@ header a:hover {
 
 .livres-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 30px; 
-    justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
     margin-bottom: 40px;
 }
 
@@ -200,11 +214,10 @@ header a:hover {
     background-color: white;
     border-radius: 0 0 8px 8px;
     overflow: hidden;
-    width: 100%; 
+    width: 100%;
     text-align: left;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
-
 
 .livre-card img {
     width: 100%;
@@ -301,10 +314,12 @@ header a:hover {
     font-size: 12px;
 }
 
+/* space-between al posto di gap: 250px, che sforava sugli schermi medi */
 .signature-row {
     display: flex;
     align-items: center;
-    gap: 250px;
+    justify-content: space-between;
+    gap: 30px;
     margin-top: 20px;
 }
 
@@ -391,13 +406,12 @@ header a:hover {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    flex: 0 0 30%;
+    flex: 1;
     padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    align-self: stretch;
 }
 
 .compte-infos {
@@ -410,16 +424,12 @@ header a:hover {
     flex-direction: column;
 }
 
-.compte-infos .btn-secondary {
-    width: fit-content;
-}
-
 .profil-photo img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
 }
 
 .profil-photo a {
@@ -452,6 +462,7 @@ header a:hover {
 }
 
 .compte-infos label {
+    display: block;
     font-size: 12px;
     color: #888;
     margin-bottom: 4px;
@@ -463,6 +474,12 @@ header a:hover {
     border-radius: 5px;
     background-color: #f9f9f9;
     width: 100%;
+}
+
+.compte-infos .btn-secondary,
+.compte-infos .btn-primary {
+    align-self: center;
+    margin-top: 10px;
 }
 
 /* ==== LIVRES TABLE ==== */
@@ -491,10 +508,12 @@ header a:hover {
     padding: 20px 15px;
     border-bottom: 1px solid #f0f0f0;
     font-size: 14px;
+    vertical-align: middle;
 }
 
-.livres-table tr:nth-child(even) {
-    background-color: #f0f7ff;
+/* tinta calda coerente con la palette (prima era azzurrino #f0f7ff) */
+.livres-table tbody tr:nth-child(even) {
+    background-color: #faf7f2;
 }
 
 .livres-table img {
@@ -505,6 +524,7 @@ header a:hover {
 }
 
 .badge {
+    display: inline-block;
     padding: 4px 10px;
     border-radius: 20px;
     font-size: 12px;
@@ -529,9 +549,8 @@ header a:hover {
 /* ==== AUTH PAGES ==== */
 .auth-page {
     display: flex;
-    gap: 0;
     min-height: 80vh;
-    margin: -50px;
+    margin: -50px; /* compensa il padding di main */
 }
 
 .auth-form {
@@ -550,7 +569,14 @@ header a:hover {
     margin-bottom: 10px;
 }
 
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .auth-form label {
+    display: block;
     font-size: 12px;
     color: #888;
     margin-bottom: 4px;
@@ -565,10 +591,9 @@ header a:hover {
     max-width: 350px;
 }
 
-.auth-form form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.auth-form .btn-primary {
+    width: 100%;
+    max-width: 350px;
 }
 
 .auth-form p {
@@ -589,11 +614,6 @@ header a:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.auth-form .btn-primary {
-    width: 100%;
-    max-width: 350px;
 }
 
 /* ==== FOOTER ==== */
@@ -617,7 +637,7 @@ footer nav a {
     font-size: 14px;
 }
 
-/* ==== RESPONSIVE ==== */
+/* ==== RESPONSIVE: TABLET ==== */
 @media (max-width: 1024px) {
 
     main {
@@ -626,7 +646,7 @@ footer nav a {
 
     /* HEADER */
     header {
-        flex-wrap: wrap;
+        padding: 20px;
         position: relative;
     }
 
@@ -644,7 +664,7 @@ footer nav a {
         left: 0;
         right: 0;
         background-color: #F5F0E8;
-        padding: 20px 50px;
+        padding: 20px;
         gap: 20px;
         border-top: 1px solid #ddd;
         z-index: 100;
@@ -659,7 +679,7 @@ footer nav a {
     /* HERO */
     .hero {
         flex-direction: column;
-        padding: 40px 20px;
+        padding: 40px 0;
         gap: 30px;
     }
 
@@ -685,8 +705,8 @@ footer nav a {
 
     /* DERNIERS LIVRES */
     .derniers-livres {
-        margin: 0 -15px;
-        padding: 35px 15px;
+        margin: 0 -20px; /* = padding laterale di main su mobile */
+        padding: 35px 20px;
     }
 
     .derniers-livres h2,
@@ -697,19 +717,23 @@ footer nav a {
         margin-bottom: 25px;
     }
 
-    .livres-grid,
+    /* .livres-grid è una grid: flex-direction non aveva effetto */
+    .livres-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
     .etapes {
         flex-direction: column;
         align-items: stretch;
+        gap: 20px;
     }
 
-    .livre-card,
     .etape {
         width: 100%;
-        max-width: 100%;
     }
 
-    /* COMMENT CA MARCHE */
+    /* COMMENT CA MARCHE / NOS VALEURS */
     .comment-ca-marche,
     .nos-valeurs {
         padding: 35px 0;
@@ -718,16 +742,6 @@ footer nav a {
     .comment-ca-marche > p,
     .nos-valeurs p {
         font-size: 16px;
-    }
-
-    /* NOS VALEURS */
-    .signature-row {
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .signature-row img {
-        margin-left: 0;
     }
 
     /* LIVRES */
@@ -739,19 +753,15 @@ footer nav a {
 
     .livres-header input {
         width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
     }
 
     /* LIVRE SHOW */
     .livre-show {
         flex-direction: column;
+        gap: 30px;
     }
 
-    .livre-show-image {
-        width: 100%;
-    }
-
+    .livre-show-image,
     .livre-show-content {
         width: 100%;
     }
@@ -779,7 +789,7 @@ footer nav a {
     /* AUTH */
     .auth-page {
         flex-direction: column;
-        margin: -20px -15px;
+        margin: -30px -20px; /* = padding di main su mobile */
         min-height: auto;
     }
 
@@ -790,9 +800,7 @@ footer nav a {
 
     .auth-form input,
     .auth-form .btn-primary {
-        width: 100%;
         max-width: 100%;
-        box-sizing: border-box;
     }
 
     .auth-image {
@@ -816,6 +824,22 @@ footer nav a {
     }
 
     footer nav {
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 12px;
+    }
+}
+
+/* ==== RESPONSIVE: MOBILE ==== */
+@media (max-width: 600px) {
+
+    .livres-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .signature-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
     }
 }
