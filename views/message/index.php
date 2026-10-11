@@ -5,9 +5,10 @@
 <div>
     <?php foreach($messages as $message): ?>
         <div>
+            <p><?= $message['prenom'] ?></p>
             <p><?= $message['contenu'] ?></p>
             <p><?= $message['date_envoi'] ?></p>
-            <a href="<?= BASE_URL ?>/messages/<?= $message['id'] ?>">Voir la conversation</a>
+            <a href="<?= BASE_URL ?>/messages/<?= $message['id'] ?>">Voir la conversation</a>        
         </div>
     <?php endforeach; ?>
 </div>
