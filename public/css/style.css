@@ -64,7 +64,6 @@ header nav {
     gap: 30px;
 }
 
-/* cambio colore invece del grassetto: il bold allarga il testo e fa "saltare" il menu */
 header a:hover {
     color: #3D9B6B;
 }
@@ -314,7 +313,6 @@ header a:hover {
     font-size: 12px;
 }
 
-/* space-between al posto di gap: 250px, che sforava sugli schermi medi */
 .signature-row {
     display: flex;
     align-items: center;
@@ -511,7 +509,7 @@ header a:hover {
     vertical-align: middle;
 }
 
-/* tinta calda coerente con la palette (prima era azzurrino #f0f7ff) */
+
 .livres-table tbody tr:nth-child(even) {
     background-color: #faf7f2;
 }
@@ -616,6 +614,132 @@ header a:hover {
     object-fit: cover;
 }
 
+/* ==== MESSAGERIE ==== */
+.messagerie {
+    display: flex;
+    gap: 20px;
+    min-height: 500px;
+}
+
+.messagerie-liste {
+    flex: 0 0 300px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px 0;
+}
+
+.messagerie-liste h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 28px;
+    padding: 0 20px 20px;
+}
+
+.conversation-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    transition: background-color 0.2s;
+}
+
+.conversation-item:hover {
+    background-color: #F5F0E8;
+}
+
+.conversation-avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.conversation-info {
+    flex: 1;
+    min-width: 0; /* permette al testo di troncarsi invece di allargare la colonna */
+}
+
+.conversation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.conversation-nom {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.conversation-date {
+    font-size: 12px;
+    color: #888;
+}
+
+.conversation-preview {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.messagerie-conversation {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.messagerie-empty {
+    margin: auto; 
+    color: #888;
+}
+
+.fil-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+}
+
+.message-contenu {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.message-date {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.message-recu {
+    align-self: flex-start;
+}
+
+.message-recu .message-contenu {
+    background-color: white;
+}
+
+.message-envoye {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.message-envoye .message-contenu {
+    background-color: #DCEFE4;
+}
+
 /* ==== FOOTER ==== */
 footer {
     display: flex;
@@ -644,7 +768,7 @@ footer nav a {
         padding: 30px 20px;
     }
 
-    /* HEADER */
+    /* === HEADER ==== */
     header {
         padding: 20px;
         position: relative;
@@ -676,7 +800,7 @@ footer nav a {
         display: flex;
     }
 
-    /* HERO */
+    /* === HERO === */
     .hero {
         flex-direction: column;
         padding: 40px 0;
@@ -703,9 +827,9 @@ footer nav a {
         text-align: center;
     }
 
-    /* DERNIERS LIVRES */
+    /* === DERNIERS LIVRES === */
     .derniers-livres {
-        margin: 0 -20px; /* = padding laterale di main su mobile */
+        margin: 0 -20px;
         padding: 35px 20px;
     }
 
@@ -717,7 +841,7 @@ footer nav a {
         margin-bottom: 25px;
     }
 
-    /* .livres-grid è una grid: flex-direction non aveva effetto */
+    
     .livres-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
@@ -733,7 +857,7 @@ footer nav a {
         width: 100%;
     }
 
-    /* COMMENT CA MARCHE / NOS VALEURS */
+    /* === COMMENT CA MARCHE / NOS VALEURS === */
     .comment-ca-marche,
     .nos-valeurs {
         padding: 35px 0;
@@ -744,7 +868,7 @@ footer nav a {
         font-size: 16px;
     }
 
-    /* LIVRES */
+    /* === LIVRES === */
     .livres-header {
         flex-direction: column;
         align-items: stretch;
@@ -755,7 +879,7 @@ footer nav a {
         width: 100%;
     }
 
-    /* LIVRE SHOW */
+    /* === LIVRE SHOW === */
     .livre-show {
         flex-direction: column;
         gap: 30px;
@@ -771,7 +895,7 @@ footer nav a {
         overflow-wrap: anywhere;
     }
 
-    /* MON COMPTE */
+    /* === MON COMPTE === */
     .compte-card {
         flex-direction: column;
     }
@@ -786,7 +910,7 @@ footer nav a {
         padding: 20px;
     }
 
-    /* AUTH */
+    /* === AUTH === */
     .auth-page {
         flex-direction: column;
         margin: -30px -20px; /* = padding di main su mobile */
@@ -807,7 +931,7 @@ footer nav a {
         display: none;
     }
 
-    /* TABLE */
+    /* === TABLE === */
     .livres-table {
         overflow-x: auto;
     }
@@ -816,7 +940,25 @@ footer nav a {
         min-width: 560px;
     }
 
-    /* FOOTER */
+    /* === MESSAGERIE === */    
+
+    .messagerie {
+        flex-direction: column;
+    }
+        
+    .messagerie-liste {
+        flex: none;
+    }
+
+    .messagerie-conversation {
+        padding: 20px 0;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+    
+    /* === FOOTER === */
     footer {
         flex-direction: column;
         padding: 20px;
@@ -828,6 +970,7 @@ footer nav a {
         justify-content: center;
         gap: 12px;
     }
+
 }
 
 /* ==== RESPONSIVE: MOBILE ==== */
@@ -843,3 +986,5 @@ footer nav a {
         gap: 15px;
     }
 }
+
+

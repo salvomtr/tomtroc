@@ -1,6 +1,7 @@
 <?php /** @var string BASE_URL */ ?>
 <?php /** @var array $messages */ ?>
 <?php /** @var array $conversations */ ?>
+<?php /** @var array $user */ ?>
 
 
 <div class="messagerie">
@@ -23,6 +24,20 @@
     </div>
 
     <div class="messagerie-conversation">
-        <p class="messagerie-empty">Sélectionnez une conversation</p>
+
+        <?php if (empty($messages)): ?>
+            <p class="messagerie-empty">Sélectionnez une conversation</p>
+
+        <?php else: ?>
+            <div class="fil-messages">
+                <?php foreach($messages as $message): ?>
+                    <div class="message <?= $message['user_id_expediteur'] == $user['id'] ? 'message-envoye' : 'message-recu' ?>">
+                        <p class="message-contenu"><?= $message['contenu'] ?></p>
+                        <span class="message-date"><?= date('d.m H:i', strtotime($message['date_envoi'])) ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
     </div>
 </div>
