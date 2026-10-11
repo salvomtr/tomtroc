@@ -66,6 +66,7 @@ class UserController extends AbstractController {
 
             // Verifie si l'utilisateur existe et si le mot de passe est correct
             if($user && password_verify($password, $user['password'])) {
+                unset($user['password']);
                 // Stocke l'utilisateur en session
                 $_SESSION['user'] = $user;
                 //Redirige vers la page d'accueil
@@ -84,8 +85,33 @@ class UserController extends AbstractController {
     #[Route('/mon-compte')]
     public function monCompte(): void {
         $this->requireLogin();
-
         $user = $this->getUser();
+
+        if ($this->isPost()){
+            // 1. Les données toujours mises à jour
+            $data = [
+                'prenom' => $_POST['pseudo'],
+                'email' => $_POST['email'],
+            ];
+
+            // 2. Le mot de passe seulement s'il a été rempli
+            if (!empty($_POST['password'])) {
+                $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            }
+
+            // 3. Sauvegarde dans la base 
+            $userModel = new \App\Model\UserModel();
+            $userModel->update($user['id'], $data);
+
+            // 4. Met à jour la session avec les nouvelles données
+            $userAJour = $userModel->findById($user['id']);
+            unset($userAJour['password']);
+            $_SESSION['user'] = $userAJour;
+
+            // 5. Retour sur la page
+            $this->redirect('/mon-compte');
+        }
+
         $bookModel = new \App\Model\BookModel();
         $livres = $bookModel->findByUserId($user['id']);
         

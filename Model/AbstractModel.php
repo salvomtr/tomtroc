@@ -43,4 +43,20 @@ abstract class AbstractModel {
 
         return $stmt->execute(array_values($data));
     }
+
+    // Met à jour un enregistrement existant
+    public function update(int $id, array $data): bool {
+        // Construit "prenom = ?, email = ?" à partir des clés du tableau
+        $set = implode(', ', array_map(fn($colonne) => "$colonne = ?", array_keys($data)));
+
+        $stmt = $this->pdo->prepare(
+        "UPDATE {$this->table} SET $set WHERE id = ?"
+        );
+
+        // Les valeurs du SET, puis l'id pour le WHERE
+        $valeurs = array_values($data);
+        $valeurs[] = $id;
+
+        return $stmt->execute($valeurs);
+    }
 }
