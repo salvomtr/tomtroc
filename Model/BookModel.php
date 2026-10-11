@@ -16,6 +16,7 @@ class BookModel extends AbstractModel {
             "SELECT books.*, users.prenom 
             FROM books 
             JOIN users ON books.user_id = users.id 
+            WHERE books.disponible = 1
             ORDER BY books.id DESC LIMIT ?"
         );
         $stmt->bindValue(1, $limit, \PDO::PARAM_INT);
@@ -28,6 +29,7 @@ class BookModel extends AbstractModel {
             "SELECT books.*, users.prenom 
             FROM books 
             JOIN users ON books.user_id = users.id
+            WHERE books.disponible = 1
             ORDER BY books.id DESC"
         );
         return $stmt->fetchAll();
@@ -39,6 +41,7 @@ class BookModel extends AbstractModel {
             FROM books 
             JOIN users ON books.user_id = users.id
             WHERE books.titre LIKE ?
+            AND books.disponible = 1
             ORDER BY books.id DESC"
         );
         $stmt->execute(['%' . $search . '%']);
