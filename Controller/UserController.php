@@ -14,9 +14,18 @@ class UserController extends AbstractController {
     public function show(int $id): void {
         $userModel = new \App\Model\UserModel();
         $user = $userModel->findById($id);
+
+        if (!$profil) {
+            $this->redirect('/livres');
+        }
+
+        $bookModel = new \App\Model\BookModel();
+        $livres = $bookModel->findByUserId($id);
         
         $this->render('user/profile', [
-            'user' => $user
+            'profil' => $profil,
+            'livres' => $livres,
+            'user' => $this->getUser(),
         ]);
     }
 
