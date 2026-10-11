@@ -32,8 +32,9 @@ class BookController extends AbstractController {
 
         $this->render('book/show', [
             'livre' => $livre,
-            'metaTitle' => $livre['titre'], 
-            ]);
+            'metaTitle' => $livre['titre'],
+            'user' => $this->getUser(),
+        ]);
     }
 
     #[Route('/livre/ajouter')]
@@ -55,6 +56,5 @@ class BookController extends AbstractController {
             $this->render('book/add');
         }
     }
-
 }
 
