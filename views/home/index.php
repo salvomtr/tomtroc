@@ -19,10 +19,10 @@
         <?php foreach($derniers_livres as $livre): ?>
             <a href="<?= BASE_URL ?>/livres/<?= $livre['id'] ?>">
                 <div class="livre-card">
-                    <img src="<?= BASE_URL ?>/public/img/<?= $livre['image'] ?>" alt="<?= $livre['titre'] ?>">
-                    <h3><?= $livre['titre'] ?></h3>
-                    <p><?= $livre['auteur'] ?></p>
-                    <p class="vendu-par">Vendu par : <?= $livre['prenom'] ?> <?= $livre['nom'] ?></p>
+                    <img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
+                    <h3><?= htmlspecialchars($livre['titre']) ?></h3>
+                    <p><?= htmlspecialchars($livre['auteur']) ?></p>
+                    <p class="vendu-par">Vendu par : <?= htmlspecialchars($livre['prenom']) ?></p>
                 </div>
             </a>
         <?php endforeach; ?>

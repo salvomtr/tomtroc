@@ -10,10 +10,10 @@
     <!-- Partie gauche -->
     <div class="compte-profil">
         <div class="profil-photo">
-            <img src="<?= BASE_URL ?>/public/img/img_profil.jpg" alt="Photo de profil">
+            <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($user['photo'] ?: 'img_profil.jpg') ?>" alt="Photo de profil">
             <a href="#">modifier</a>
         </div>
-        <h2><?= $user['prenom'] ?></h2>
+        <h2><?= htmlspecialchars($user['prenom']) ?></h2>
         <p class="membre-depuis">Membre depuis 1 an</p>
         <p class="bibliotheque-count">BIBLIOTHÈQUE<br><?= count($livres) ?> livres</p>
     </div>
@@ -23,13 +23,13 @@
         <h3>Vos informations personnelles</h3>
         <form method="POST" action="<?= BASE_URL ?>/mon-compte">
             <label>Adresse email</label>
-            <input type="email" name="email" value="<?= $user['email'] ?>">
+            <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>">
 
             <label>Mot de passe</label>
             <input type="password" name="password" placeholder="••••••••">
 
             <label>Pseudo</label>
-            <input type="text" name="pseudo" value="<?= $user['prenom'] ?>">
+            <input type="text" name="pseudo" value="<?= htmlspecialchars($user['prenom']) ?>">
 
             <button type="submit" class="btn-secondary">Enregistrer</button>
         </form>
@@ -52,10 +52,10 @@
         <tbody>
             <?php foreach($livres as $livre): ?>
             <tr>
-                <td><img src="<?= BASE_URL ?>/public/img/<?= $livre['image'] ?>" alt="<?= $livre['titre'] ?>"></td>
-                <td><?= $livre['titre'] ?></td>
-                <td><?= $livre['auteur'] ?></td>
-                <td><?= substr($livre['description'], 0, 50) ?>...</td>
+                <td><img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>"></td>
+                <td><?= htmlspecialchars($livre['titre']) ?></td>
+                <td><?= htmlspecialchars($livre['auteur']) ?></td>
+                <td><?= htmlspecialchars(mb_substr($livre['description'], 0, 50)) ?>...</td>
                 <td>
                     <span class="badge <?= $livre['disponible'] ? 'badge-green' : 'badge-red' ?>">
                         <?= $livre['disponible'] ? 'disponible' : 'non dispo' ?>
@@ -64,7 +64,7 @@
                 <td>
                     <a href="<?= BASE_URL ?>/livre/editer/<?= $livre['id'] ?>">Éditer</a>
                     <a href="<?= BASE_URL ?>/livre/supprimer/<?= $livre['id'] ?>"
-                        onclick="return confirm('Etes-vous sur de vouloir supprimer ce livre ?');">Supprimer
+                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer
                     </a>
                 </td>
             </tr>

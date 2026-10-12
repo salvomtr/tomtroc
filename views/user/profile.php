@@ -6,7 +6,7 @@
 <div class="compte-card">
     <div class="compte-profil">
         <div class="profil-photo">
-            <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($profil['photo'] ?? 'img_profil.jpg') ?>" alt="<?= htmlspecialchars($profil['prenom']) ?>">
+            <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($profil['photo'] ?: 'img_profil.jpg') ?>" alt="<?= htmlspecialchars($profil['prenom']) ?>">
         </div>
     
         <h2><?= htmlspecialchars($profil['prenom']) ?></h2>
@@ -26,7 +26,7 @@
     <?php foreach ($livres as $livre): ?>
         <a href="<?= BASE_URL ?>/livres/<?= $livre['id'] ?>">
             <div class="livre-card">
-                <img src="<?= BASE_URL ?>/public/img/<?= $livre['image'] ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
+                <img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
                 <h3><?= htmlspecialchars($livre['titre']) ?></h3>
                 <p><?= htmlspecialchars($livre['auteur']) ?></p>
                 <span class="badge <?= $livre['disponible'] ? 'badge-green' : 'badge-red' ?>">

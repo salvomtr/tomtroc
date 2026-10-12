@@ -4,10 +4,10 @@
 
 <div class="livre-show">
     <div class="livre-show-image">
-        <img src="<?= BASE_URL ?>/public/img/<?= $livre['image'] ?>" alt="<?= $livre['titre'] ?>">
+        <img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
     </div>
     <div class="livre-show-content">
-        <h1><?= $livre['titre'] ?></h1>
+        <h1><?= htmlspecialchars($livre['titre']) ?></h1>
         <p class="livre-auteur">par <?= htmlspecialchars($livre['auteur']) ?></p>
         
         <p class="label">DESCRIPTION</p>

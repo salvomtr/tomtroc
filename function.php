@@ -19,3 +19,13 @@ function dd(...$vars): void
     dump(...$vars);
     die;
 }
+
+// Retourne l'URL de l'image d'un livre, ou l'image par défaut si elle est vide
+function bookImage(?string $image): string
+{
+    if (empty($image)) {
+        $image = 'default-book.png';
+    }
+
+    return BASE_URL . '/public/img/' . htmlspecialchars($image);
+}
