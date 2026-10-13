@@ -2,6 +2,7 @@
 <?php /** @var array $messages */ ?>
 <?php /** @var array $conversations */ ?>
 <?php /** @var array $user */ ?>
+<?php /** @var bool $conversationOuverte */ ?>
 
 
 <div class="messagerie">
