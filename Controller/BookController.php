@@ -57,19 +57,6 @@ class BookController extends AbstractController {
         }
     }
 
-    // Recupere un livre et verifie qu'il appartient a l'utilisateur connecté
-    private function getLivreDuProprietaire(int $id): array {
-        $bookModel = new \App\Model\BookModel();
-        $livre = $bookModel->findById($id);
-        $user = $this->getUser();
-
-        if (!$livre || $livre['user_id'] != $user['id']) {
-            $this->redirect('/mon-compte');
-        }
-
-        return $livre;
-    }
-
     #[Route('/livre/supprimer/:id')]
     public function delete(int $id): void {
         // L'utilisateur doit etre connecté
@@ -84,6 +71,43 @@ class BookController extends AbstractController {
 
         //Retour sur Mon Compte
         $this->redirect('/mon-compte');
+    }
+
+    #[Route('/livre/editer/:id')]
+    public function edit(int $id): void {
+        // 1. Connecté + propriétaire du livre
+        $this->requireLogin();
+        $livre = $this->getLivreDuProprietaire($id);
+
+         // 2. Formulaire envoyé : on sauvegarde
+        if ($this->isPost()) {
+            $bookModel = new \App\Model\BookModel();
+            $bookModel->update($id, [
+                'titre'       => $_POST['titre'],
+                'auteur'      => $_POST['auteur'],
+                'description' => $_POST['description'],
+                'disponible'  => isset($_POST['disponible']) ? 1 : 0,
+            ]);
+            $this->redirect('/mon-compte');
+        }
+
+        // 3. Sinon : formulaire pré-rempli
+        $this->render('book/edit', [
+            'livre' => $livre,
+        ]);
+    }
+
+    // Recupere un livre et verifie qu'il appartient a l'utilisateur connecté
+    private function getLivreDuProprietaire(int $id): array {
+        $bookModel = new \App\Model\BookModel();
+        $livre = $bookModel->findById($id);
+        $user = $this->getUser();
+
+        if (!$livre || $livre['user_id'] != $user['id']) {
+            $this->redirect('/mon-compte');
+        }
+
+        return $livre;
     }
 }
 

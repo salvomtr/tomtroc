@@ -36,6 +36,10 @@
     </div>
 </div>
 
+<?php if (empty($livres)): ?>
+    <p>Vous n'avez pas encore de livres dans votre Bibliothèque.</p>
+<?php endif; ?>    
+
 <!-- Tableau des livres -->
 <div class="livres-table">
     <table>
@@ -71,4 +75,8 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
+
+<div class="livres-actions">
+    <a href="<?= BASE_URL ?>/livre/ajouter" class="btn-primary">Ajouter un livre</a>
 </div>

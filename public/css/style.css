@@ -544,6 +544,11 @@ header a:hover {
     margin-right: 10px;
 }
 
+.livres-actions {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 /* ==== AUTH PAGES ==== */
 .auth-page {
     display: flex;
@@ -656,7 +661,7 @@ header a:hover {
 
 .conversation-info {
     flex: 1;
-    min-width: 0; /* permette al testo di troncarsi invece di allargare la colonna */
+    min-width: 0; 
 }
 
 .conversation-header {
