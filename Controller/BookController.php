@@ -33,7 +33,7 @@ class BookController extends AbstractController {
         // Si le livre n'existe pas, retour à la liste
         if (!$livre) {
             $this->redirect('/livres');
-        
+        }
 
         $this->render('book/show', [
             'livre' => $livre,
