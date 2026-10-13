@@ -49,6 +49,7 @@ class BookController extends AbstractController {
                 'auteur' => $_POST['auteur'],
                 'description' => $_POST['description'],
                 'disponible' => isset($_POST['disponible']) ? 1 : 0,
+                'image' => $this->uploadImage(),
                 'user_id' => $user['id'],
             ]);
             $this->redirect('/mon-compte');
@@ -79,15 +80,23 @@ class BookController extends AbstractController {
         $this->requireLogin();
         $livre = $this->getLivreDuProprietaire($id);
 
-         // 2. Formulaire envoyé : on sauvegarde
+        // 2. Formulaire envoyé : on sauvegarde
         if ($this->isPost()) {
-            $bookModel = new \App\Model\BookModel();
-            $bookModel->update($id, [
+            $data = [
                 'titre'       => $_POST['titre'],
                 'auteur'      => $_POST['auteur'],
                 'description' => $_POST['description'],
                 'disponible'  => isset($_POST['disponible']) ? 1 : 0,
-            ]);
+            ];
+
+            // Nouvelle image seulement si l'utilisateur en a choisi une
+            $image = $this->uploadImage();
+            if ($image) {
+                $data['image'] = $image;
+            }
+
+            $bookModel = new \App\Model\BookModel();
+            $bookModel->update($id, $data);
             $this->redirect('/mon-compte');
         }
 
@@ -109,5 +118,44 @@ class BookController extends AbstractController {
 
         return $livre;
     }
-}
 
+    // Enregistre l'image envoyée et retourne son nom, ou null si aucune image valide
+    private function uploadImage(): ?string {
+        // 1. Aucun fichier envoyé
+        if (empty($_FILES['image']) || $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
+            return null;
+        }
+
+        $fichier = $_FILES['image'];
+
+        // 2. Erreur pendant l'envoi
+        if ($fichier['error'] !== UPLOAD_ERR_OK) {
+            return null;
+        }
+
+        // 3. Taille maximum : 2 Mo
+        if ($fichier['size'] > 2 * 1024 * 1024) {
+            return null;
+        }
+
+        // 4. Vérifie le vrai type du fichier (son contenu, pas son nom)
+        $typesAutorises = [
+            'image/jpeg' => 'jpg',
+            'image/png'  => 'png',
+            'image/webp' => 'webp',
+        ];
+        $type = mime_content_type($fichier['tmp_name']);
+
+        if (!isset($typesAutorises[$type])) {
+            return null;
+        }
+
+        // 5. Nom unique, avec l'extension correspondant au type vérifié
+        $nom = uniqid('livre_') . '.' . $typesAutorises[$type];
+
+        // 6. Déplace le fichier dans public/img/
+        move_uploaded_file($fichier['tmp_name'], __DIR__ . '/../public/img/' . $nom);
+
+        return $nom;
+    }
+}
