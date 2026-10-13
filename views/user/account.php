@@ -37,8 +37,8 @@
 </div>
 
 <?php if (empty($livres)): ?>
-    <p>Vous n'avez pas encore de livres dans votre Bibliothèque.</p>
-<?php endif; ?>    
+    <p>Vous n'avez pas encore de livres dans votre bibliothèque.</p>
+<?php endif; ?>
 
 <!-- Tableau des livres -->
 <div class="livres-table">
@@ -56,20 +56,19 @@
         <tbody>
             <?php foreach($livres as $livre): ?>
             <tr>
-                <td><img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>"></td>
-                <td><?= htmlspecialchars($livre['titre']) ?></td>
-                <td><?= htmlspecialchars($livre['auteur']) ?></td>
-                <td><?= htmlspecialchars(mb_substr($livre['description'], 0, 50)) ?>...</td>
-                <td>
+                <td class="col-photo"><img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>"></td>
+                <td class="col-titre"><?= htmlspecialchars($livre['titre']) ?></td>
+                <td class="col-auteur"><?= htmlspecialchars($livre['auteur']) ?></td>
+                <td class="col-description"><?= htmlspecialchars(mb_substr($livre['description'], 0, 80)) ?>…</td>
+                <td class="col-dispo">
                     <span class="badge <?= $livre['disponible'] ? 'badge-green' : 'badge-red' ?>">
-                        <?= $livre['disponible'] ? 'disponible' : 'non dispo' ?>
+                        <?= $livre['disponible'] ? 'disponible' : 'non dispo.' ?>
                     </span>
                 </td>
-                <td>
-                    <a href="<?= BASE_URL ?>/livre/editer/<?= $livre['id'] ?>">Éditer</a>
-                    <a href="<?= BASE_URL ?>/livre/supprimer/<?= $livre['id'] ?>"
-                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer
-                    </a>
+                <td class="col-actions">
+                    <a href="<?= BASE_URL ?>/livre/editer/<?= $livre['id'] ?>" class="lien-editer">Éditer</a>
+                    <a href="<?= BASE_URL ?>/livre/supprimer/<?= $livre['id'] ?>" class="lien-supprimer"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer</a>
                 </td>
             </tr>
             <?php endforeach; ?>

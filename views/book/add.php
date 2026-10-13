@@ -1,24 +1,26 @@
 <?php /** @var string BASE_URL */ ?>
 
-<h1>Ajouter un livre</h1>
+<a href="<?= BASE_URL ?>/mon-compte" class="lien-retour">← Retour à mon compte</a>
 
-<form method="POST" action="<?= BASE_URL ?>/livre/ajouter" enctype="multipart/form-data">
-    <label>Titre</label>
-    <input type="text" name="titre" required>
+<h1 class="livre-form-titre">Ajouter un livre</h1>
 
-    <label>Auteur</label>
-    <input type="text" name="auteur" required>
+<form method="POST" action="<?= BASE_URL ?>/livre/ajouter" enctype="multipart/form-data" class="livre-form">
+    <label for="titre">Titre</label>
+    <input type="text" id="titre" name="titre" required>
 
-    <label>Image (facultatif)</label>
-    <input type="file" name="image" accept="image/jpeg, image/png, image/webp">
+    <label for="auteur">Auteur</label>
+    <input type="text" id="auteur" name="auteur" required>
 
-    <label>Description</label>
-    <textarea name="description"></textarea>
+    <label for="image">Image (facultatif)</label>
+    <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/webp">
 
-    <label>Disponible à l'échange</label>
-    <input type="checkbox" name="disponible" value="1" checked>
+    <label for="description">Description</label>
+    <textarea id="description" name="description" rows="8"></textarea>
+
+    <label class="livre-form-checkbox">
+        <input type="checkbox" name="disponible" value="1" checked>
+        Disponible à l'échange
+    </label>
 
     <button type="submit" class="btn-primary">Ajouter</button>
 </form>
-
-<a href="<?= BASE_URL ?>/mon-compte">Retour à mon compte</a>

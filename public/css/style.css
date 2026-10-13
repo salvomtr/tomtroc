@@ -509,7 +509,6 @@ header a:hover {
     vertical-align: middle;
 }
 
-
 .livres-table tbody tr:nth-child(even) {
     background-color: #faf7f2;
 }
@@ -538,10 +537,21 @@ header a:hover {
     color: #721c24;
 }
 
-.livres-table a {
-    color: #3D9B6B;
+.livres-table .lien-editer {
+    color: #2C2C2C;
+    text-decoration: underline;
     font-size: 14px;
-    margin-right: 10px;
+    margin-right: 15px;
+}
+
+.livres-table .lien-supprimer {
+    color: #D9534F;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.livres-table .col-description {
+    font-style: italic;
 }
 
 .livres-actions {
@@ -627,6 +637,78 @@ header a:hover {
     font-size: 14px;
 }
 
+/* ==== FORMULAIRE LIVRE (ajout / modification) ==== */
+.lien-retour {
+    display: inline-block;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.lien-retour:hover {
+    color: #3D9B6B;
+}
+
+.livre-form-titre {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.livre-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 40px;
+}
+
+.livre-form label {
+    font-size: 12px;
+    color: #888;
+    margin-top: 10px;
+}
+
+.livre-form input[type="text"],
+.livre-form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 100%;
+}
+
+.livre-form textarea {
+    resize: vertical;
+}
+
+.livre-form input[type="file"] {
+    font-size: 14px;
+}
+
+.livre-form-image {
+    width: 150px;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.livre-form .livre-form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #2C2C2C;
+}
+
+.livre-form .btn-primary {
+    align-self: flex-start;
+    margin-top: 20px;
+}
+
 /* ==== MESSAGERIE ==== */
 .messagerie {
     display: flex;
@@ -669,7 +751,7 @@ header a:hover {
 
 .conversation-info {
     flex: 1;
-    min-width: 0; 
+    min-width: 0;
 }
 
 .conversation-header {
@@ -706,7 +788,7 @@ header a:hover {
 }
 
 .messagerie-empty {
-    margin: auto; 
+    margin: auto;
     color: #888;
 }
 
@@ -774,8 +856,7 @@ footer nav a {
     font-size: 14px;
 }
 
-/* === RESPONSIVE === */
-
+/* ==== RESPONSIVE ==== */
 @media (max-width: 600px) {
 
     main {
@@ -874,6 +955,91 @@ footer nav a {
         object-fit: cover;
     }
 
+    /* La table devient une liste de cartes */
+    .livres-table {
+        background-color: transparent;
+    }
+
+    .livres-table thead {
+        display: none;
+    }
+
+    .livres-table table,
+    .livres-table tbody {
+        display: block;
+    }
+
+    .livres-table tbody tr {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        column-gap: 20px;
+        align-items: start;
+        background-color: white;
+        border-radius: 20px;
+        padding: 30px 25px;
+        margin-bottom: 20px;
+    }
+
+    .livres-table tbody tr:nth-child(even) {
+        background-color: white;
+    }
+
+    .livres-table td {
+        padding: 0;
+        border: none;
+    }
+
+    .livres-table .col-photo {
+        grid-column: 1;
+        grid-row: 1 / span 3;
+    }
+
+    .livres-table .col-photo img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .livres-table .col-titre {
+        grid-column: 2;
+        grid-row: 1;
+        font-size: 16px;
+    }
+
+    .livres-table .col-auteur {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 16px;
+    }
+
+    .livres-table .col-dispo {
+        grid-column: 2;
+        grid-row: 3;
+        margin-top: 10px;
+    }
+
+    .livres-table .col-description {
+        grid-column: 1 / -1;
+        grid-row: 4;
+        min-width: 0;
+        margin-top: 25px;
+        font-size: 15px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .livres-table .col-actions {
+        grid-column: 1 / -1;
+        grid-row: 5;
+        margin-top: 30px;
+        display: flex;
+        gap: 40px;
+    }
+
+    .livres-table .lien-editer,
+    .livres-table .lien-supprimer {
+        font-size: 16px;
+        margin-right: 0;
+    }
 
     .comment-ca-marche,
     .nos-valeurs {
@@ -895,7 +1061,6 @@ footer nav a {
         width: 100%;
     }
 
-
     .livres-header {
         flex-direction: column;
         align-items: stretch;
@@ -906,7 +1071,6 @@ footer nav a {
         width: 100%;
         min-width: 0;
     }
-
 
     .livre-show {
         flex-direction: column;
@@ -923,7 +1087,6 @@ footer nav a {
         font-size: 28px;
         overflow-wrap: anywhere;
     }
-
 
     .compte-card {
         flex-direction: column;
@@ -962,13 +1125,13 @@ footer nav a {
         display: none;
     }
 
-    .livres-table {
-        max-width: 100%;
-        overflow-x: auto;
+    .livre-form {
+        padding: 20px;
     }
 
-    .livres-table table {
-        min-width: 560px;
+    .livre-form .btn-primary {
+        align-self: stretch;
+        text-align: center;
     }
 
     .messagerie {
@@ -1004,5 +1167,4 @@ footer nav a {
         justify-content: center;
         gap: 12px;
     }
-
 }
