@@ -619,6 +619,14 @@ header a:hover {
     object-fit: cover;
 }
 
+.form-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
 /* ==== MESSAGERIE ==== */
 .messagerie {
     display: flex;

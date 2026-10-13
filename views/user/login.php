@@ -1,9 +1,14 @@
 <?php /** @var string BASE_URL */ ?>
+<?php /** @var string|null $error */ ?>
 
 <div class="auth-page">
     <div class="auth-form">
         <h1>Connexion</h1>
-        
+
+        <?php if (!empty($error)): ?>
+            <p class="form-error"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+
         <form method="POST" action="<?= BASE_URL ?>/connexion">
             <label>Adresse email</label>
             <input type="email" name="email" required>
