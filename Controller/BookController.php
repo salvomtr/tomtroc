@@ -30,6 +30,11 @@ class BookController extends AbstractController {
         $bookModel = new \App\Model\BookModel();
         $livre = $bookModel->findByIdWithUser($id);
 
+        // Si le livre n'existe pas, retour à la liste
+        if (!$livre) {
+            $this->redirect('/livres');
+        
+
         $this->render('book/show', [
             'livre' => $livre,
             'metaTitle' => $livre['titre'],
