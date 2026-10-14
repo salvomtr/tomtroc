@@ -12,17 +12,17 @@ class MessageController extends AbstractController {
         $messageModel = new \App\Model\MessageModel();
         $conversations = $messageModel->getConversations($user['id']);
 
-        // Ouvre directement la conversation la plus récente
-        if (!empty($conversations)) {
-            $this->redirect('/messages/' . $conversations[0]['id']);
-        }
+        // Conversation la plus récente (null s'il n'y en a aucune)
+        $interlocuteurId = $conversations[0]['id'] ?? null;
+        $messages = $interlocuteurId ? $messageModel->findConversation($user['id'], $interlocuteurId) : [];
 
-        // Aucune conversation : messagerie vide
+        // Vue "liste" : sur mobile, seule la liste des conversations est affichée
         $this->render('message/show', [
-            'conversations'       => [],
-            'messages'            => [],
-            'user'                => $user,
-            'conversationOuverte' => false,
+            'conversations'   => $conversations,
+            'messages'        => $messages,
+            'user'            => $user,
+            'interlocuteurId' => $interlocuteurId,
+            'vue'             => 'liste',
         ]);
     }
 
@@ -47,11 +47,13 @@ class MessageController extends AbstractController {
         $conversations = $messageModel->getConversations($user['id']);
         $messages = $messageModel->findConversation($user['id'], $id);
 
+        // Vue "conversation" : sur mobile, seul le fil de discussion est affiché
         $this->render('message/show', [
-            'conversations'       => $conversations,
-            'messages'            => $messages,
-            'user'                => $user,
-            'conversationOuverte' => true,
+            'conversations'   => $conversations,
+            'messages'        => $messages,
+            'user'            => $user,
+            'interlocuteurId' => $id,
+            'vue'             => 'conversation',
         ]);
     }
 }
