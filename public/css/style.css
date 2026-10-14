@@ -336,38 +336,68 @@ header a:hover {
 .livres-header h1 {
     font-family: 'Playfair Display', serif;
     font-weight: 400;
+    font-size: 36px;
 }
 
-.livres-header input {
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
+.search-bar {
+    position: relative;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 14px;
+}
+
+.search-bar input {
+    width: 290px;
+    padding: 12px 15px 12px 40px;
+    border: 1px solid #eee;
+    border-radius: 5px;
     background-color: white;
-    width: 250px;
+    font-size: 14px;
+}
+
+.search-bar input::placeholder {
+    color: #aaa;
 }
 
 /* ==== LIVRE SHOW ==== */
+.fil-ariane {
+    font-size: 11px;
+    color: #aaa;
+    margin: -30px 0 15px;
+}
+
+.fil-ariane a:hover {
+    color: #3D9B6B;
+}
+
 .livre-show {
     display: flex;
-    gap: 60px;
-    padding: 40px 0;
+    margin: 0 -50px -50px; /* pleine largeur, collé au footer */
 }
 
 .livre-show-image {
-    width: 45%;
+    width: 50%;
 }
 
 .livre-show-image img {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
+    height: 100%;
+    object-fit: cover;
 }
 
 .livre-show-content {
-    width: 55%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    padding: 50px 80px;
+    background-color: #FAF9F7;
 }
 
 .livre-show-content h1 {
@@ -377,19 +407,57 @@ header a:hover {
 }
 
 .livre-auteur {
-    color: #888;
-}
-
-.label {
-    font-size: 11px;
-    letter-spacing: 2px;
     color: #aaa;
 }
 
+.livre-separateur {
+    width: 30px;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 15px 0;
+}
+
+.label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #2C2C2C;
+    margin-top: 10px;
+}
+
 .livre-description {
-    color: #555;
-    line-height: 1.8;
+    color: #2C2C2C;
+    line-height: 1.5;
     font-size: 14px;
+}
+
+.proprietaire {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+    padding: 6px 25px 6px 6px;
+    background-color: white;
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+.proprietaire img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.proprietaire:hover {
+    color: #3D9B6B;
+}
+
+.btn-message {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
 }
 
 /* ==== MON COMPTE ==== */
@@ -567,7 +635,7 @@ header a:hover {
 }
 
 .auth-form {
-    width: 45%;
+    width: 55%;
     padding: 120px 60px 80px 12%;
     display: flex;
     flex-direction: column;
@@ -1112,15 +1180,28 @@ footer nav a {
         min-width: 0;
     }
 
+    .fil-ariane {
+        display: none;
+    }
+
     .livre-show {
         flex-direction: column;
-        gap: 30px;
+        margin: -30px -20px -30px;
     }
 
     .livre-show-image,
     .livre-show-content {
         width: 100%;
         min-width: 0;
+    }
+
+    .livre-show-image img {
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .livre-show-content {
+        padding: 40px 20px;
     }
 
     .livre-show-content h1 {

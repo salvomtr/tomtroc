@@ -50,7 +50,7 @@ class BookModel extends AbstractModel {
 
     public function findByIdWithUser(int $id): array|false {
         $stmt = $this->pdo->prepare(
-            "SELECT books.*, users.prenom 
+            "SELECT books.*, users.prenom, users.photo 
             FROM books 
             JOIN users ON books.user_id = users.id
             WHERE books.id = ?"
