@@ -53,7 +53,7 @@ class BookController extends AbstractController {
                 'titre' => $_POST['titre'],
                 'auteur' => $_POST['auteur'],
                 'description' => $_POST['description'],
-                'disponible' => isset($_POST['disponible']) ? 1 : 0,
+                'disponible' => ($_POST['disponible'] ?? '0') === '1' ? 1 : 0,
                 'image' => $this->uploadImage(),
                 'user_id' => $user['id'],
             ]);
@@ -91,7 +91,7 @@ class BookController extends AbstractController {
                 'titre'       => $_POST['titre'],
                 'auteur'      => $_POST['auteur'],
                 'description' => $_POST['description'],
-                'disponible'  => isset($_POST['disponible']) ? 1 : 0,
+                'disponible'  => ($_POST['disponible'] ?? '0') === '1' ? 1 : 0,
             ];
 
             // Nouvelle image seulement si l'utilisateur en a choisi une
