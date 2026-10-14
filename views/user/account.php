@@ -4,7 +4,7 @@
 /** @var string BASE_URL */
 ?>
 
-<h1>Mon compte</h1>
+<h1 class="compte-titre">Mon compte</h1>
 
 <div class="compte-card">
     <!-- Partie gauche -->

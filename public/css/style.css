@@ -37,6 +37,11 @@ a {
     color: inherit;
 }
 
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+}
+
 /* ==== HEADER ==== */
 header {
     display: flex;
@@ -172,8 +177,6 @@ header a:hover {
 }
 
 .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
     font-size: 50px;
 }
 
@@ -334,8 +337,6 @@ header a:hover {
 }
 
 .livres-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
     font-size: 36px;
 }
 
@@ -401,8 +402,6 @@ header a:hover {
 }
 
 .livre-show-content h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
     font-size: 36px;
 }
 
@@ -461,6 +460,11 @@ header a:hover {
 }
 
 /* ==== MON COMPTE ==== */
+.compte-titre {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
 .compte-card {
     display: flex;
     gap: 20px;
@@ -491,8 +495,8 @@ header a:hover {
 }
 
 .profil-photo img {
-    width: 100px;
-    height: 100px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
     object-fit: cover;
     margin: 0 auto 10px;
@@ -505,12 +509,12 @@ header a:hover {
 
 .membre-depuis {
     color: #888;
-    font-size: 13px;
+    font-size: 20px;
     margin-top: 5px;
 }
 
 .bibliotheque-count {
-    font-size: 12px;
+    font-size: 18px;
     text-align: center;
     margin-top: 15px;
     color: #555;
@@ -548,6 +552,59 @@ header a:hover {
     margin-top: 10px;
 }
 
+/* ==== PROFIL PUBLIC ==== */
+.profil-public {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+}
+
+.profil-public .compte-profil {
+    flex: 0 0 30%;
+    justify-content: center;
+    padding: 50px 40px;
+    border: none;
+    border-radius: 20px;
+}
+
+.profil-separateur {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 25px 0;
+}
+
+.profil-nom {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 36px;
+}
+
+.profil-public .bibliotheque-count .label {
+    font-size: 8px;
+}
+
+.btn-ecrire {
+    margin-top: 30px;
+    font-size: 14px;
+    padding: 12px 25px;
+}
+
+.profil-livres {
+    flex: 1;
+    min-width: 0;
+}
+
+.profil-public .livres-table {
+    height: 100%;
+    border-radius: 20px;
+    margin-bottom: 0;
+}
+
+.profil-public .livres-table tbody tr:nth-child(even) {
+    background-color: #EEF2F5;
+}
+
 /* ==== LIVRES TABLE ==== */
 .livres-table {
     background-color: white;
@@ -563,7 +620,7 @@ header a:hover {
 
 .livres-table th {
     text-align: left;
-    padding: 15px;
+    padding: 35px 30px;
     font-size: 12px;
     color: #888;
     border-bottom: 1px solid #ddd;
@@ -571,7 +628,7 @@ header a:hover {
 }
 
 .livres-table td {
-    padding: 20px 15px;
+    padding: 45px 25px;
     border-bottom: 1px solid #f0f0f0;
     font-size: 14px;
     vertical-align: middle;
@@ -582,8 +639,8 @@ header a:hover {
 }
 
 .livres-table img {
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     object-fit: cover;
     border-radius: 4px;
 }
@@ -644,8 +701,6 @@ header a:hover {
 }
 
 .auth-form h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
     font-size: 36px;
     margin-bottom: 10px;
 }
@@ -717,9 +772,8 @@ header a:hover {
     color: #3D9B6B;
 }
 
+.compte-titre,
 .livre-form-titre {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
     font-size: 36px;
     margin-bottom: 30px;
 }
@@ -792,8 +846,6 @@ header a:hover {
 }
 
 .messagerie-liste h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
     font-size: 28px;
     padding: 0 20px 20px;
 }
@@ -1207,6 +1259,19 @@ footer nav a {
     .livre-show-content h1 {
         font-size: 28px;
         overflow-wrap: anywhere;
+    }
+
+    .profil-public {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .profil-public .compte-profil {
+        flex: none;
+    }
+
+    .profil-public .livres-table tbody tr:nth-child(even) {
+        background-color: white;
     }
 
     .compte-card {
