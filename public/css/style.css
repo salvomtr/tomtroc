@@ -782,7 +782,6 @@ header a:hover {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-width: 600px;
     background-color: white;
     border-radius: 8px;
     padding: 40px;
@@ -829,6 +828,11 @@ header a:hover {
 .livre-form .btn-primary {
     align-self: flex-start;
     margin-top: 20px;
+}
+
+.livre-form-page {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* ==== MESSAGERIE ==== */
