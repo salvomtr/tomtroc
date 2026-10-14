@@ -1,9 +1,11 @@
 <?php /** @var string BASE_URL */ ?>
 <?php /** @var array $conversations */ ?>
 <?php /** @var array $messages */ ?>
-<?php /** @var array $user */ ?>
 <?php /** @var int|null $interlocuteurId */ ?>
+<?php /** @var array|null $interlocuteur */ ?>
+<?php /** @var array $user */ ?>
 <?php /** @var string $vue */ ?>
+
 
 <div class="messagerie messagerie-vue-<?= $vue ?>">
 
@@ -35,6 +37,13 @@
     <div class="messagerie-conversation">
         <a href="<?= BASE_URL ?>/messages" class="messagerie-retour">← Retour</a>
 
+        <?php if ($interlocuteur): ?>
+            <div class="conversation-entete">
+                <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($interlocuteur['photo'] ?: 'img_profil.jpg') ?>" alt="<?= htmlspecialchars($interlocuteur['prenom']) ?>">
+                <span><?= htmlspecialchars($interlocuteur['prenom']) ?></span>
+            </div>
+        <?php endif; ?>
+
         <?php if ($interlocuteurId === null): ?>
             <p class="messagerie-empty">Vous n'avez pas encore de conversation.</p>
         <?php elseif (empty($messages)): ?>
@@ -44,7 +53,12 @@
                 <?php foreach($messages as $message): ?>
                     <div class="message <?= $message['user_id_expediteur'] == $user['id'] ? 'message-envoye' : 'message-recu' ?>">
                         <p class="message-contenu"><?= htmlspecialchars($message['contenu']) ?></p>
-                        <span class="message-date"><?= date('d.m H:i', strtotime($message['date_envoi'])) ?></span>
+                        <div class="message-meta">
+                            <?php if ($message['user_id_expediteur'] != $user['id']): ?>
+                                <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($interlocuteur['photo'] ?: 'img_profil.jpg') ?>" alt="">
+                            <?php endif; ?>
+                            <span class="message-date"><?= date('d.m H:i', strtotime($message['date_envoi'])) ?></span>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>

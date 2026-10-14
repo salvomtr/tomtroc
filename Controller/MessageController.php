@@ -15,6 +15,7 @@ class MessageController extends AbstractController {
         // Conversation la plus récente (null s'il n'y en a aucune)
         $interlocuteurId = $conversations[0]['id'] ?? null;
         $messages = $interlocuteurId ? $messageModel->findConversation($user['id'], $interlocuteurId) : [];
+        $interlocuteur = $interlocuteurId ? (new \App\Model\UserModel())->findById($interlocuteurId) : null;
 
         // Vue "liste" : sur mobile, seule la liste des conversations est affichée
         $this->render('message/show', [
@@ -22,6 +23,7 @@ class MessageController extends AbstractController {
             'messages'        => $messages,
             'user'            => $user,
             'interlocuteurId' => $interlocuteurId,
+            'interlocuteur'   => $interlocuteur,
             'vue'             => 'liste',
         ]);
     }
@@ -30,6 +32,13 @@ class MessageController extends AbstractController {
     public function show(int $id): void {
         $this->requireLogin();
         $user = $this->getUser();
+
+        // L'interlocuteur doit exister et ne pas être soi-même
+        $interlocuteur = (new \App\Model\UserModel())->findById($id);
+        if (!$interlocuteur || $id === $user['id']) {
+            $this->redirect('/messages');
+        }
+
         $messageModel = new \App\Model\MessageModel();
 
         // Formulaire envoyé : on enregistre le message (s'il n'est pas vide)
@@ -53,6 +62,7 @@ class MessageController extends AbstractController {
             'messages'        => $messages,
             'user'            => $user,
             'interlocuteurId' => $id,
+            'interlocuteur'   => $interlocuteur,
             'vue'             => 'conversation',
         ]);
     }

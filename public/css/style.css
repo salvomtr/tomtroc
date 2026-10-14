@@ -675,7 +675,7 @@ header a:hover {
 
 .livres-table .col-description {
     font-style: italic;
-    max-width: auto;
+    width: 220px;
     overflow-wrap: anywhere;
 }
 
@@ -783,7 +783,7 @@ header a:hover {
     flex-direction: column;
     gap: 8px;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 20px;
     padding: 40px;
 }
 
@@ -838,32 +838,32 @@ header a:hover {
 /* ==== MESSAGERIE ==== */
 .messagerie {
     display: flex;
-    gap: 20px;
-    min-height: 500px;
+    min-height: 80vh;
+    margin: -50px; /* pleine largeur, comme auth-page */
 }
 
 .messagerie-liste {
     flex: 0 0 300px;
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px 0;
+    background-color: #FAF9F7;
+    padding: 40px 0;
 }
 
 .messagerie-liste h1 {
     font-size: 28px;
-    padding: 0 20px 20px;
+    padding: 0 30px 30px;
 }
 
 .conversation-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 20px;
+    padding: 15px 30px;
     transition: background-color 0.2s;
 }
 
-.conversation-item:hover {
-    background-color: #F5F0E8;
+.conversation-item:hover,
+.conversation-item.active {
+    background-color: white;
 }
 
 .conversation-avatar img {
@@ -908,7 +908,7 @@ header a:hover {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 40px 50px;
 }
 
 .messagerie-empty {
@@ -924,7 +924,7 @@ header a:hover {
 
 .message {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse; /* la date passe au-dessus du message */
     max-width: 60%;
 }
 
@@ -936,10 +936,38 @@ header a:hover {
     overflow-wrap: anywhere;
 }
 
+.message-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.message-meta img {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .message-date {
     font-size: 11px;
     color: #aaa;
-    margin-top: 4px;
+}
+
+.conversation-entete {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.conversation-entete img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .message-recu {
@@ -956,11 +984,7 @@ header a:hover {
 }
 
 .message-envoye .message-contenu {
-    background-color: #DCEFE4;
-}
-
-.conversation-item.active {
-    background-color: #F5F0E8;
+    background-color: #E5EEF5;
 }
 
 .messagerie-liste-vide {
@@ -986,15 +1010,16 @@ header a:hover {
 .message-form textarea {
     flex: 1;
     min-height: 50px;
-    padding: 12px;
-    border: 1px solid #ddd;
+    height: 50px;
+    padding: 15px 20px;
+    border: none;
     border-radius: 5px;
     background-color: white;
-    resize: vertical;
+    resize: none;
 }
 
 .message-form .btn-primary {
-    align-self: flex-end;
+    align-self: center;
 }
 
 /* ==== FOOTER ==== */
@@ -1185,7 +1210,7 @@ footer nav a {
         grid-column: 1 / -1;
         grid-row: 4;
         min-width: 0;
-        max-width: none;
+        width: auto;
         margin-top: 25px;
         font-size: 15px;
         line-height: 1.5;
@@ -1289,10 +1314,6 @@ footer nav a {
         padding: 20px;
     }
 
-    .compte-infos input {
-        max-width: 100%;
-    }
-
     .auth-page {
         flex-direction: column;
         margin: -30px -20px;
@@ -1328,18 +1349,28 @@ footer nav a {
     .messagerie {
         flex-direction: column;
         min-width: 0;
+        margin: -30px -20px;
     }
 
     .messagerie-liste {
-        flex: none;
+        flex: 1;
         width: 100%;
         min-width: 0;
+    }
+
+    .messagerie-liste h1 {
+        padding: 0 20px 30px;
+    }
+
+    .conversation-item {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
     }
 
     .messagerie-conversation {
         width: 100%;
         min-width: 0;
-        padding: 20px 0;
+        padding: 30px 20px;
     }
 
     .message {
