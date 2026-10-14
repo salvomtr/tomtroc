@@ -178,7 +178,7 @@ header a:hover {
 }
 
 .hero-image {
-    width: 50%;
+    width: 40%;
 }
 
 .hero-image img {
@@ -568,10 +568,10 @@ header a:hover {
 
 .auth-form {
     width: 45%;
-    padding: 80px 60px;
+    padding: 120px 60px 80px 12%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 20px;
 }
 
@@ -620,7 +620,7 @@ header a:hover {
 }
 
 .auth-image {
-    width: 55%;
+    width: 45%;
 }
 
 .auth-image img {
@@ -637,7 +637,7 @@ header a:hover {
     font-size: 14px;
 }
 
-/* ==== FORMULAIRE LIVRE (ajout / modification) ==== */
+/* ==== FORMULAIRE LIVRE ==== */
 .lien-retour {
     display: inline-block;
     color: #888;
@@ -938,7 +938,7 @@ footer nav a {
     .hero {
         flex-direction: column;
         gap: 30px;
-        padding: 40px 0;
+        padding: 0 0 40px;
     }
 
     .hero-text {
@@ -952,7 +952,9 @@ footer nav a {
     }
 
     .hero-image {
+        order: -1;
         width: 100%;
+        margin: -30px -20px 0;
     }
 
     .btn-hero {
