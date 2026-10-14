@@ -17,7 +17,8 @@
         <p class="membre-depuis">Membre depuis 1 an</p>
         <p class="bibliotheque-count">
             <span class="label">Bibliothèque</span><br>
-            <i class="fa-solid fa-book-open"></i> <?= count($livres) ?> livres
+            <i class="fa-solid fa-book-open"></i>
+            <?= count($livres) ?> livre<?= count($livres) > 1 ? 's' : '' ?>
         </p>
 
         <?php if (!$user || $user['id'] != $profil['id']): ?>
@@ -52,7 +53,7 @@
                                 <a href="<?= BASE_URL ?>/livres/<?= $livre['id'] ?>"><?= htmlspecialchars($livre['titre']) ?></a>
                             </td>
                             <td class="col-auteur"><?= htmlspecialchars($livre['auteur']) ?></td>
-                            <td class="col-description"><?= htmlspecialchars(mb_substr($livre['description'], 0, 80)) ?>…</td>
+                            <td class="col-description"><?= htmlspecialchars(mb_substr($livre['description'], 0, 80)) ?><?= mb_strlen($livre['description']) > 80 ? '…' : '' ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
