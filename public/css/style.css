@@ -460,11 +460,6 @@ header a:hover {
 }
 
 /* ==== MON COMPTE ==== */
-.compte-titre {
-    font-size: 36px;
-    margin-bottom: 30px;
-}
-
 .compte-card {
     display: flex;
     gap: 20px;
@@ -474,8 +469,8 @@ header a:hover {
 
 .compte-profil {
     background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: none;
+    border-radius: 20px;
     flex: 1;
     padding: 40px;
     display: flex;
@@ -487,11 +482,12 @@ header a:hover {
 .compte-infos {
     flex: 1;
     background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: none;
+    border-radius: 20px;
     padding: 40px;
     display: flex;
     flex-direction: column;
+    justify-content: center; 
 }
 
 .profil-photo img {
@@ -504,6 +500,7 @@ header a:hover {
 
 .profil-photo a {
     font-size: 12px;
+    text-decoration: underline;
     color: #888;
 }
 
@@ -521,34 +518,41 @@ header a:hover {
 }
 
 .compte-infos h3 {
-    margin-bottom: 20px;
-    font-size: 16px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 30px;
+    font-size: 20px;        
+    font-weight: 500;
 }
 
 .compte-infos form {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
 }
 
 .compte-infos label {
     display: block;
-    font-size: 12px;
+    font-size: 14px;    
     color: #888;
     margin-bottom: 4px;
 }
 
 .compte-infos input {
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding: 14px;            
+    font-size: 16px;
+    border: none;
     border-radius: 5px;
-    background-color: #f9f9f9;
-    width: 100%;
+    background-color: #EEF2F5;
+    width: 100%;               
 }
 
 .compte-infos .btn-secondary,
 .compte-infos .btn-primary {
-    align-self: center;
+    align-self: flex-start;
     margin-top: 10px;
 }
 
@@ -563,12 +567,11 @@ header a:hover {
     flex: 0 0 30%;
     justify-content: center;
     padding: 50px 40px;
-    border: none;
-    border-radius: 20px;
 }
 
 .profil-separateur {
     width: 100%;
+    max-width: 350px;
     border: none;
     border-top: 1px solid #eee;
     margin: 25px 0;
@@ -597,18 +600,13 @@ header a:hover {
 
 .profil-public .livres-table {
     height: 100%;
-    border-radius: 20px;
     margin-bottom: 0;
-}
-
-.profil-public .livres-table tbody tr:nth-child(even) {
-    background-color: #EEF2F5;
 }
 
 /* ==== LIVRES TABLE ==== */
 .livres-table {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 20px;
     overflow: hidden;
     margin-bottom: 20px;
 }
@@ -635,7 +633,7 @@ header a:hover {
 }
 
 .livres-table tbody tr:nth-child(even) {
-    background-color: #faf7f2;
+    background-color: #EEF2F5;
 }
 
 .livres-table img {
@@ -653,13 +651,13 @@ header a:hover {
 }
 
 .badge-green {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #3D9B6B;
+    color: white;
 }
 
 .badge-red {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #C96A6A;
+    color: white;
 }
 
 .livres-table .lien-editer {
@@ -677,6 +675,8 @@ header a:hover {
 
 .livres-table .col-description {
     font-style: italic;
+    max-width: auto;
+    overflow-wrap: anywhere;
 }
 
 .livres-actions {
@@ -688,7 +688,7 @@ header a:hover {
 .auth-page {
     display: flex;
     min-height: 80vh;
-    margin: -50px; /* compensa il padding di main */
+    margin: -50px;
 }
 
 .auth-form {
@@ -1181,6 +1181,7 @@ footer nav a {
         grid-column: 1 / -1;
         grid-row: 4;
         min-width: 0;
+        max-width: none;
         margin-top: 25px;
         font-size: 15px;
         line-height: 1.5;
@@ -1270,10 +1271,6 @@ footer nav a {
         flex: none;
     }
 
-    .profil-public .livres-table tbody tr:nth-child(even) {
-        background-color: white;
-    }
-
     .compte-card {
         flex-direction: column;
     }
@@ -1286,6 +1283,10 @@ footer nav a {
 
     .compte-infos {
         padding: 20px;
+    }
+
+    .compte-infos input {
+        max-width: 100%;
     }
 
     .auth-page {

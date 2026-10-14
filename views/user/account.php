@@ -13,9 +13,16 @@
             <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($user['photo'] ?: 'img_profil.jpg') ?>" alt="Photo de profil">
             <a href="#">modifier</a>
         </div>
-        <h2><?= htmlspecialchars($user['prenom']) ?></h2>
+
+        <hr class="profil-separateur">
+
+        <h2 class="profil-nom"><?= htmlspecialchars($user['prenom']) ?></h2>
         <p class="membre-depuis">Membre depuis 1 an</p>
-        <p class="bibliotheque-count">BIBLIOTHÈQUE<br><?= count($livres) ?> livres</p>
+        <p class="bibliotheque-count">
+            <span class="label">Bibliothèque</span><br>
+            <i class="fa-solid fa-book-open"></i>
+            <?= count($livres) ?> livre<?= count($livres) > 1 ? 's' : '' ?>
+        </p>
     </div>
 
     <!-- Partie droite -->
@@ -59,7 +66,7 @@
                 <td class="col-photo"><img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>"></td>
                 <td class="col-titre"><?= htmlspecialchars($livre['titre']) ?></td>
                 <td class="col-auteur"><?= htmlspecialchars($livre['auteur']) ?></td>
-                <td class="col-description"><?= htmlspecialchars(mb_substr($livre['description'], 0, 80)) ?>…</td>
+                <td class="col-description"><?= htmlspecialchars(mb_substr($livre['description'], 0, 80)) ?><?= mb_strlen($livre['description']) > 80 ? '…' : '' ?></td>         
                 <td class="col-dispo">
                     <span class="badge <?= $livre['disponible'] ? 'badge-green' : 'badge-red' ?>">
                         <?= $livre['disponible'] ? 'disponible' : 'non dispo.' ?>
