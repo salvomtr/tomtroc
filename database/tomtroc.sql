@@ -64,12 +64,12 @@ CREATE TABLE messages (
 
 -- Mot de passe : TomTroc2026! (haché avec password_hash)
 INSERT INTO users (id, prenom, email, password, photo, created_at) VALUES
-(1, 'Nathalire',   'nathalie@tomtroc.fr', '$2y$10$qmExAMBjinKhJXaDZEKoLOPOywz9LDV43TI2mCXjf1c/ckkaX4vPu', NULL, '2025-03-12 10:00:00'),
-(2, 'Alexlecture', 'alex@tomtroc.fr',     '$2y$10$qmExAMBjinKhJXaDZEKoLOPOywz9LDV43TI2mCXjf1c/ckkaX4vPu', NULL, '2025-09-02 18:30:00'),
+(1, 'Nathalire',   'nathalie@tomtroc.fr', '$2y$10$qmExAMBjinKhJXaDZEKoLOPOywz9LDV43TI2mCXjf1c/ckkaX4vPu', 'photo-femme1.jpg', '2025-03-12 10:00:00'),
+(2, 'Alexlecture', 'alex@tomtroc.fr',     '$2y$10$qmExAMBjinKhJXaDZEKoLOPOywz9LDV43TI2mCXjf1c/ckkaX4vPu', 'profil-homme.jpg', '2025-09-02 18:30:00'),
 (3, 'Sas634',      'sas@tomtroc.fr',      '$2y$10$qmExAMBjinKhJXaDZEKoLOPOywz9LDV43TI2mCXjf1c/ckkaX4vPu', NULL, '2026-01-20 09:15:00');
 
 -- Les images référencées sont présentes dans public/img/.
--- Une image NULL affiche l'image par défaut (default-book.png).
+-- Une image NULL (ex. L'Étranger) affiche l'image par défaut (default-book.png).
 INSERT INTO books (id, user_id, titre, auteur, image, description, disponible) VALUES
 (1, 1, 'The Kinfolk Table', 'Nathan Williams', 'kinfolk.png',
  'Un très beau livre de recettes qui met à l''honneur les repas simples partagés entre amis.\n\nLes photographies sont magnifiques et chaque recette est accompagnée du portrait de la personne qui la propose. Je l''ai beaucoup utilisé, il est en très bon état.',
@@ -83,16 +83,16 @@ INSERT INTO books (id, user_id, titre, auteur, image, description, disponible) V
 (4, 2, 'Esther', 'Alabaster', 'esther.png',
  'Une édition illustrée très soignée, avec de grandes photographies sur chaque double page. Un bel objet à feuilleter.',
  1),
-(5, 2, 'Le Petit Prince', 'Antoine de Saint-Exupéry', NULL,
+(5, 2, 'Le Petit Prince', 'Antoine de Saint-Exupéry', 'le_petit_prince.jpg',
  'Le grand classique, dans une édition de poche un peu usée mais complète. Parfait pour le relire ou le faire découvrir.',
  1),
 (6, 2, 'L''Étranger', 'Albert Camus', NULL,
  'Roman court et marquant. Quelques passages soulignés au crayon, sinon en bon état.',
  0),
-(7, 3, 'Les Misérables', 'Victor Hugo', NULL,
+(7, 3, 'Les Misérables', 'Victor Hugo', 'les-miserables.jpg',
  'Édition intégrale en deux volumes. Une longue lecture, mais l''une des plus belles de la littérature française.\n\nJe préfère l''échanger contre un roman contemporain.',
  1),
-(8, 3, 'Sapiens', 'Yuval Noah Harari', NULL,
+(8, 3, 'Sapiens', 'Yuval Noah Harari', 'sapiens.jpg',
  'Une histoire de l''humanité racontée de manière très claire. Couverture légèrement abîmée.',
  1);
 
