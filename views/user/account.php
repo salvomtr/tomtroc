@@ -1,7 +1,8 @@
 <?php 
+/** @var string BASE_URL */
+/** @var string|null $error */
 /** @var array $user */
 /** @var array $livres */
-/** @var string BASE_URL */
 ?>
 
 <h1 class="compte-titre">Mon compte</h1>
@@ -29,6 +30,10 @@
     <div class="compte-infos">
         <h3>Vos informations personnelles</h3>
         <form method="POST" action="<?= BASE_URL ?>/mon-compte">
+            <?php if (!empty($error)): ?>
+                <p class="form-error"><?= htmlspecialchars($error) ?></p>
+            <?php endif; ?>
+
             <label>Adresse email</label>
             <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>">
 

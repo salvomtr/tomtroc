@@ -101,33 +101,61 @@ class UserController extends AbstractController {
     public function monCompte(): void {
         $this->requireLogin();
         $user = $this->getUser();
+        $bookModel = new \App\Model\BookModel();
 
         if ($this->isPost()) {
-            // 1. Les données toujours mises à jour
+            // 1. Récupère les données sans espaces autour
+            $prenom = trim($_POST['pseudo'] ?? '');
+            $email  = trim($_POST['email'] ?? '');
+
+            $userModel = new \App\Model\UserModel();
+            $error = null;
+
+            // 2. Vérifications (les mêmes qu'à l'inscription)
+            $existant = $userModel->findByEmail($email);
+
+            if ($prenom === '' || $email === '') {
+                $error = "Le pseudo et l'adresse email sont obligatoires.";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $error = "L'adresse email n'est pas valide.";
+            } elseif ($existant && $existant['id'] != $user['id']) {
+                // L'email appartient à un AUTRE utilisateur
+                $error = 'Cette adresse email est déjà utilisée.';
+            }
+
+            // 3. Une erreur : on réaffiche la page avec le message
+            if ($error) {
+                $this->render('user/account', [
+                    'user'   => array_merge($user, ['prenom' => $prenom, 'email' => $email]),
+                    'livres' => $bookModel->findByUserId($user['id']),
+                    'error'  => $error,
+                ]);
+                return;
+            }
+
+            // 4. Les données valides
             $data = [
-                'prenom' => $_POST['pseudo'],
-                'email'  => $_POST['email'],
+                'prenom' => $prenom,
+                'email'  => $email,
             ];
 
-            // 2. Le mot de passe seulement s'il a été rempli
+            // 5. Le mot de passe seulement s'il a été rempli
             if (!empty($_POST['password'])) {
                 $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
             }
 
-            // 3. Sauvegarde dans la base
-            $userModel = new \App\Model\UserModel();
+            // 6. Sauvegarde dans la base
             $userModel->update($user['id'], $data);
 
-            // 4. Met à jour la session avec les nouvelles données
+            // 7. Met à jour la session avec les nouvelles données
             $userAJour = $userModel->findById($user['id']);
             unset($userAJour['password']);
             $_SESSION['user'] = $userAJour;
 
-            // 5. Retour sur la page
+            // 8. Retour sur la page
             $this->redirect('/mon-compte');
         }
 
-        $bookModel = new \App\Model\BookModel();
         $livres = $bookModel->findByUserId($user['id']);
 
         $this->render('user/account', [
