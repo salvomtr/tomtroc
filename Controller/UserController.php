@@ -12,7 +12,7 @@ class UserController extends AbstractController {
 
         // Si l'utilisateur n'existe pas, retour à la liste des livres
         if (!$profil) {
-            $this->redirect('/livres');
+            $this->notFound();
         }
 
         // Bibliothèque de l'utilisateur

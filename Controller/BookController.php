@@ -4,16 +4,15 @@ namespace App\Controller;
 use App\Core\Route;
 
 class BookController extends AbstractController {
-    
 
     #[Route('/livres')]
     public function index(): void {
-        
         $bookModel = new \App\Model\BookModel();
 
-        $search =$_GET['search'] ?? '';
+        // Mot recherché dans l'URL, ex. /livres?search=wabi
+        $search = trim($_GET['search'] ?? '');
 
-        if($search) {
+        if ($search) {
             $livres = $bookModel->search($search);
         } else {
             $livres = $bookModel->findAllWithUser();
@@ -21,7 +20,7 @@ class BookController extends AbstractController {
 
         $this->render('book/index', [
             'livres' => $livres,
-            'search' => $search
+            'search' => $search,
         ]);
     }
 
@@ -30,32 +29,32 @@ class BookController extends AbstractController {
         $bookModel = new \App\Model\BookModel();
         $livre = $bookModel->findByIdWithUser($id);
 
-        // Si le livre n'existe pas, retour à la liste
+        // Le livre n'existe pas : page 404
         if (!$livre) {
-            $this->redirect('/livres');
+            $this->notFound();
         }
 
         $this->render('book/show', [
-            'livre' => $livre,
+            'livre'     => $livre,
             'metaTitle' => $livre['titre'],
-            'user' => $this->getUser(),
+            'user'      => $this->getUser(),
         ]);
     }
 
     #[Route('/livre/ajouter')]
     public function add(): void {
         $this->requireLogin();
-        
-        if($this->isPost()) {
+
+        if ($this->isPost()) {
             $user = $this->getUser();
             $bookModel = new \App\Model\BookModel();
             $bookModel->create([
-                'titre' => $_POST['titre'],
-                'auteur' => $_POST['auteur'],
+                'titre'       => $_POST['titre'],
+                'auteur'      => $_POST['auteur'],
                 'description' => $_POST['description'],
-                'disponible' => ($_POST['disponible'] ?? '0') === '1' ? 1 : 0,
-                'image' => $this->uploadImage(),
-                'user_id' => $user['id'],
+                'disponible'  => ($_POST['disponible'] ?? '0') === '1' ? 1 : 0,
+                'image'       => $this->uploadImage(),
+                'user_id'     => $user['id'],
             ]);
             $this->redirect('/mon-compte');
         } else {
@@ -65,27 +64,27 @@ class BookController extends AbstractController {
 
     #[Route('/livre/supprimer/:id')]
     public function delete(int $id): void {
-        // L'utilisateur doit etre connecté
+        // L'utilisateur doit être connecté
         $this->requireLogin();
 
-        //Verifie que le livre existe et appartient a l'utilisateur
+        // Vérifie que le livre existe et appartient à l'utilisateur
         $this->getLivreDuProprietaire($id);
 
-        //Supprime le livre
+        // Supprime le livre
         $bookModel = new \App\Model\BookModel();
         $bookModel->delete($id);
 
-        //Retour sur Mon Compte
+        // Retour sur Mon compte
         $this->redirect('/mon-compte');
     }
 
     #[Route('/livre/editer/:id')]
     public function edit(int $id): void {
-        // 1. Connecté + propriétaire du livre
+        // 1. Connecté et propriétaire du livre
         $this->requireLogin();
         $livre = $this->getLivreDuProprietaire($id);
 
-        // 2. Formulaire envoyé : on sauvegarde
+        // 2. Formulaire envoyé : on enregistre
         if ($this->isPost()) {
             $data = [
                 'titre'       => $_POST['titre'],
@@ -111,13 +110,19 @@ class BookController extends AbstractController {
         ]);
     }
 
-    // Recupere un livre et verifie qu'il appartient a l'utilisateur connecté
+    // Récupère un livre et vérifie qu'il appartient à l'utilisateur connecté
     private function getLivreDuProprietaire(int $id): array {
         $bookModel = new \App\Model\BookModel();
         $livre = $bookModel->findById($id);
         $user = $this->getUser();
 
-        if (!$livre || $livre['user_id'] != $user['id']) {
+        // Le livre n'existe pas : page 404
+        if (!$livre) {
+            $this->notFound();
+        }
+
+        // Le livre appartient à un autre utilisateur : retour à Mon compte
+        if ($livre['user_id'] != $user['id']) {
             $this->redirect('/mon-compte');
         }
 

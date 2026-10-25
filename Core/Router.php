@@ -2,33 +2,32 @@
 namespace App\Core;
 
 class Router {
-    
+
     // Tableau associatif qui stocke toutes les routes de l'application
-    // Format : ['url' => [ControllerClass, 'methode']]
+    // Format : ['url' => [ControllerClass, 'méthode']]
     private array $routes = [];
 
-    // Méthode qui permet d'ajouter une route au tableau
-    // $url : le chemin de l'url ex: '/livres'
-    // $action : le callable ex: [BookController::class, 'index']
-    public function add(string $url, array $action): void { 
+    // Ajoute une route au tableau
+    // $url : le chemin de l'URL, ex. '/livres'
+    // $action : le contrôleur et la méthode, ex. [BookController::class, 'index']
+    public function add(string $url, array $action): void {
         $this->routes[$url] = $action;
     }
 
-
-    // Scanne les controlleurs et lit les attributs #[Route]
+    // Lit les attributs #[Route] des contrôleurs
     // pour construire automatiquement le tableau des routes
     public function scan(array $controllers): void {
-        foreach($controllers as $controller) {
-            //Crée un objet ReflectionClass pour inspecter le controller
+        foreach ($controllers as $controller) {
+            // Crée un objet ReflectionClass pour inspecter le contrôleur
             $reflection = new \ReflectionClass($controller);
 
-            //Recupere tous les methods du controller
-            foreach($reflection->getMethods() as $method) {
-                // Lit les attributs #[Route] sur chaque methode
+            // Récupère toutes les méthodes du contrôleur
+            foreach ($reflection->getMethods() as $method) {
+                // Lit les attributs #[Route] de chaque méthode
                 $attributes = $method->getAttributes(Route::class);
 
-                foreach($attributes as $attribute) {
-                    //Cree une instance de Route pour recuperer le path
+                foreach ($attributes as $attribute) {
+                    // Crée une instance de Route pour récupérer le chemin
                     $route = $attribute->newInstance();
 
                     // Ajoute la route au tableau
@@ -38,54 +37,57 @@ class Router {
         }
     }
 
-    // Scanne automatiquement le dossier Controller/ pour trouver tous les controllers
+    // Parcourt le dossier Controller/ pour trouver tous les contrôleurs
     public function scanControllers(string $path): void {
-        //Recupere tous les fichers du dossier
+        // Récupère tous les fichiers du dossier
         $files = scandir($path);
 
         $controllers = [];
 
-        foreach($files as $file) {
-            //Ignore . .. et AbstractController
-            if($file === '.' || $file === '..' || $file === 'AbstractController.php') {
+        foreach ($files as $file) {
+            // Ignore . et .. ainsi qu'AbstractController (classe abstraite, sans route)
+            if ($file === '.' || $file === '..' || $file === 'AbstractController.php') {
                 continue;
             }
 
-            //Convertit 'HomeController.php' -> 'App\Controller\HomeController'
+            // Convertit 'HomeController.php' en 'App\Controller\HomeController'
             $class = 'App\\Controller\\' . str_replace('.php', '', $file);
 
             $controllers[] = $class;
         }
 
-        // Utilise le methode scan() existante
+        // Utilise la méthode scan() pour lire les routes
         $this->scan($controllers);
     }
 
+    // Cherche la route qui correspond à l'URL et appelle la bonne méthode
     public function run(): void {
-       $url = $_SERVER['REQUEST_URI'];
-       $url = strtok($url, '?'); // rimuove i parametri GET
+        $url = $_SERVER['REQUEST_URI'];
+        $url = strtok($url, '?'); // Supprime les paramètres GET, ex. ?search=...
 
-       
-       //Boucle sur toutes les routes
-       foreach($this->routes as $route => $action) {
-            // Convertit :id en regex ([0-9]+)
-            $pattern = preg_replace('/:([a-zA-Z]+)/', '([0-9]+)',  $route);
+        // Parcourt toutes les routes
+        foreach ($this->routes as $route => $action) {
+            // Convertit :id en expression régulière ([0-9]+)
+            $pattern = preg_replace('/:([a-zA-Z]+)/', '([0-9]+)', $route);
+            // ^ et $ : l'URL entière doit correspondre
             $pattern = '#^' . $pattern . '$#';
 
-            // Veerifie si l'url correspond au pattern
-            if(preg_match($pattern, $url, $matches)) {
+            // Vérifie si l'URL correspond à la route
+            if (preg_match($pattern, $url, $matches)) {
                 [$class, $method] = $action;
                 $controller = new $class();
 
-                //Supprime le premier element (url complete)
+                // Supprime le premier élément (l'URL complète)
                 array_shift($matches);
 
-                //Appelle la methode avec les parametres
+                // Appelle la méthode avec les paramètres, ex. show(5)
                 $controller->$method(...$matches);
                 return;
             }
-       }
+        }
 
-       echo "404 - Page non trouvée";
+        // Aucune route ne correspond : page 404 avec le layout et le code HTTP 404
+        $controller = new \App\Controller\ErrorController();
+        $controller->notFound();
     }
 }

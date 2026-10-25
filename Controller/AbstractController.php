@@ -2,40 +2,38 @@
 namespace App\Controller;
 
 abstract class AbstractController {
-    
+
+    // Affiche une vue à l'intérieur du layout commun
     protected function render(string $view, array $data = []): void {
+        // Transforme le tableau en variables, ex. ['livre' => $x] devient $livre
+        extract($data);
 
-    $baseUrl = BASE_URL;
-
-        // Extrait les variables du tableau $data, ex: ['titre' => 'TomTroc'] -> $titre = 'TomTroc'
-        extract($data); // rimpiazzare con metodo
-
-        //Construit le chemin vers le fichier de vue, ex: 'home/index' -> '../view/home/index.php'
+        // Chemin de la vue, ex. 'book/show' devient '../views/book/show.php'
         $path = __DIR__ . '/../views/' . $view . '.php';
-        
-        //Inclut le fichier de vue dans le buffer
+
+        // Capture le HTML de la vue dans $content
         ob_start();
         require $path;
         $content = ob_get_clean();
 
-        //Inclut le layout
+        // Affiche le layout, qui contient $content
         require __DIR__ . '/../views/layout.php';
-        
     }
 
-    // Methode pour verifier si o est en mlethode POST (soumission de form)
-    protected function isPost(): bool { 
-        return $_SERVER["REQUEST_METHOD"] === 'POST';
+    // Vérifie si la requête est en POST (formulaire envoyé)
+    protected function isPost(): bool {
+        return $_SERVER['REQUEST_METHOD'] === 'POST';
     }
 
+    // Redirige vers une autre URL et arrête le script
     protected function redirect(string $url): void {
         header("Location: $url");
         exit;
     }
 
-    // Methode pour verifier si le user é connecté
+    // Redirige vers la connexion si l'utilisateur n'est pas connecté
     protected function requireLogin(): void {
-        if(!$this->isLogged()) {
+        if (!$this->isLogged()) {
             $this->redirect('/connexion');
         }
     }
@@ -48,5 +46,12 @@ abstract class AbstractController {
     // Récupère l'utilisateur connecté
     protected function getUser(): array|null {
         return $_SESSION['user'] ?? null;
+    }
+
+    // Affiche la page 404 avec le layout et le bon code HTTP
+    public function notFound(): void {
+        http_response_code(404);
+        $this->render('error/404', ['metaTitle' => 'Page introuvable']);
+        exit;
     }
 }

@@ -33,9 +33,15 @@ class MessageController extends AbstractController {
         $this->requireLogin();
         $user = $this->getUser();
 
-        // L'interlocuteur doit exister et ne pas être soi-même
         $interlocuteur = (new \App\Model\UserModel())->findById($id);
-        if (!$interlocuteur || $id === $user['id']) {
+
+        // L'interlocuteur n'existe pas : page 404
+        if (!$interlocuteur) {
+            $this->notFound();
+        }
+
+        // On ne peut pas s'écrire à soi-même : retour à la messagerie
+        if ($id === (int) $user['id']) {
             $this->redirect('/messages');
         }
 
