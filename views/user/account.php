@@ -12,7 +12,6 @@
     <div class="compte-profil">
         <div class="profil-photo">
             <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($user->getPhotoOuDefaut()) ?>" alt="Photo de profil">
-            <a href="#">modifier</a>
         </div>
 
         <hr class="profil-separateur">
@@ -21,7 +20,7 @@
         <p class="membre-depuis">Membre depuis <?= $user->getAnciennete() ?></p>
         <p class="bibliotheque-count">
             <span class="label">Bibliothèque</span><br>
-            <i class="fa-solid fa-book-open"></i>
+            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
             <?= count($livres) ?> livre<?= count($livres) > 1 ? 's' : '' ?>
         </p>
     </div>

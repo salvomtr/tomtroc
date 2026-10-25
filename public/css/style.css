@@ -17,6 +17,31 @@ select {
     font: inherit;
 }
 
+/* ==== ACCESSIBILITÉ ==== */
+/* Cache un élément à l'écran, mais il reste lisible par les lecteurs d'écran
+   et utilisable au clavier (contrairement à display: none ou à l'attribut hidden) */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Contour visible pour la navigation au clavier */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid #3D9B6B;
+    outline-offset: 2px;
+}
+
 /* ==== GENERAL ==== */
 body {
     display: flex;
@@ -499,12 +524,6 @@ header a:hover {
     margin: 0 auto 10px;
 }
 
-.profil-photo a {
-    font-size: 12px;
-    text-decoration: underline;
-    color: #888;
-}
-
 .membre-depuis {
     color: #888;
     font-size: 20px;
@@ -820,7 +839,8 @@ header a:hover {
     object-fit: cover;
 }
 
-.livre-form label {
+.livre-form label,
+.livre-form .label-photo {
     font-size: 12px;
     color: #888;
     margin-top: 10px;
@@ -831,6 +851,12 @@ header a:hover {
     color: #2C2C2C;
     text-decoration: underline;
     cursor: pointer;
+}
+
+/* Contour visible quand le champ photo reçoit le focus au clavier */
+.livre-form .visually-hidden:focus-visible + .lien-photo {
+    outline: 2px solid #3D9B6B;
+    outline-offset: 3px;
 }
 
 .livre-form input[type="text"],

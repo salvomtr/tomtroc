@@ -17,25 +17,25 @@
     <header>
         <div class="header-left">
             <a href="<?= BASE_URL ?>/" class="logo">
-                <span class="logo-icon">
+                <span class="logo-icon" aria-hidden="true">
                     <span class="logo-t1">T</span>
                     <span class="logo-t2">T</span>
                 </span>
                 Tom Troc
             </a>
-            <nav>
+            <nav id="menu-principal" aria-label="Navigation principale">
                 <a href="<?= BASE_URL ?>/">Accueil</a>
                 <a href="<?= BASE_URL ?>/livres">Nos livres à l'échange</a>
             </nav>
         </div>
 
-        <div class="header-right">
+        <div class="header-right" id="menu-compte">
             <a href="<?= BASE_URL ?>/messages">
-                <i class="fa-regular fa-comment"></i>
+                <i class="fa-regular fa-comment" aria-hidden="true"></i>
                 Messagerie
             </a>
             <a href="<?= BASE_URL ?>/mon-compte">
-                <i class="fa-regular fa-user"></i>
+                <i class="fa-regular fa-user" aria-hidden="true"></i>
                 Mon compte
             </a>
             <?php if(isset($_SESSION['user_id'])): ?>
@@ -45,12 +45,13 @@
             <?php endif; ?>
         </div>
 
-         <!-- Burger button -->
-            <button class="burger" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+        <!-- Bouton burger (mobile) : aria-expanded indique si le menu est ouvert -->
+        <button type="button" class="burger" id="burger"
+                aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-principal menu-compte">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </button>
     </header>
 
     <main>
@@ -58,13 +59,13 @@
     </main>
 
     <footer>
-        <nav>
+        <nav aria-label="Liens légaux">
             <a href="#">Politique de confidentialité</a>
             <a href="#">Mentions légales</a>
         </nav>
         <a href="<?= BASE_URL ?>/" class="logo">
             Tom Troc&copy;
-            <span class="logo-icon">TT</span>
+            <span class="logo-icon" aria-hidden="true">TT</span>
         </a>
     </footer>
     <script src="<?= BASE_URL ?>/public/js/main.js"></script>

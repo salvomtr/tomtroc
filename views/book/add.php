@@ -12,10 +12,11 @@
 
         <!-- Colonne gauche : photo -->
         <div class="livre-form-photo">
-            <label for="image">Photo (facultatif)</label>
+            <p class="label-photo">Photo (facultatif)</p>
             <img src="<?= bookImage(null) ?>" alt="Aucune photo">
+            <!-- Champ caché visuellement mais accessible au clavier (Tab puis Entrée) -->
+            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/webp" class="visually-hidden">
             <label for="image" class="lien-photo">Ajouter une photo</label>
-            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/webp" hidden>
         </div>
 
         <!-- Colonne droite : champs -->

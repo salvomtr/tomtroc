@@ -5,7 +5,7 @@
 <div class="livres-header">
     <h1>Nos livres à l'échange</h1>
     <form method="GET" action="<?= BASE_URL ?>/livres" class="search-bar">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         <input type="search" name="search" placeholder="Rechercher un livre"
                value="<?= htmlspecialchars($search ?? '') ?>" aria-label="Rechercher un livre">
     </form>
