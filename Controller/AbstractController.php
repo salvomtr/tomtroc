@@ -1,7 +1,13 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Manager\UserManager;
+
 abstract class AbstractController {
+
+    // Utilisateur connecté, chargé une seule fois par requête
+    private ?User $utilisateurConnecte = null;
 
     // Affiche une vue à l'intérieur du layout commun
     protected function render(string $view, array $data = []): void {
@@ -40,12 +46,16 @@ abstract class AbstractController {
 
     // Vérifie si l'utilisateur est connecté
     protected function isLogged(): bool {
-        return isset($_SESSION['user']);
+        return $this->getUser() !== null;
     }
 
-    // Récupère l'utilisateur connecté
-    protected function getUser(): array|null {
-        return $_SESSION['user'] ?? null;
+    // Récupère l'utilisateur connecté (objet User), ou null
+    // La session ne contient que son id : les données viennent toujours de la base
+    protected function getUser(): ?User {
+        if ($this->utilisateurConnecte === null && isset($_SESSION['user_id'])) {
+            $this->utilisateurConnecte = (new UserManager())->findById($_SESSION['user_id']);
+        }
+        return $this->utilisateurConnecte;
     }
 
     // Affiche la page 404 avec le layout et le bon code HTTP

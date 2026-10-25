@@ -1,5 +1,5 @@
 <?php /** @var string BASE_URL */ ?>
-<?php /** @var array $livre */ ?>
+<?php /** @var \App\Entity\Book $livre */ ?>
 
 <div class="livre-form-page">
     <a href="<?= BASE_URL ?>/mon-compte" class="lien-retour">← retour</a>
@@ -11,7 +11,7 @@
         <!-- Colonne gauche : photo -->
         <div class="livre-form-photo">
             <label for="image">Photo</label>
-            <img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
+            <img src="<?= bookImage($livre->getImage()) ?>" alt="<?= htmlspecialchars($livre->getTitre()) ?>">
             <label for="image" class="lien-photo">Modifier la photo</label>
             <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/webp" hidden>
         </div>
@@ -19,18 +19,18 @@
         <!-- Colonne droite : champs -->
         <div class="livre-form-champs">
             <label for="titre">Titre</label>
-            <input type="text" id="titre" name="titre" value="<?= htmlspecialchars($livre['titre']) ?>" required>
+            <input type="text" id="titre" name="titre" value="<?= htmlspecialchars($livre->getTitre()) ?>" required>
 
             <label for="auteur">Auteur</label>
-            <input type="text" id="auteur" name="auteur" value="<?= htmlspecialchars($livre['auteur']) ?>" required>
+            <input type="text" id="auteur" name="auteur" value="<?= htmlspecialchars($livre->getAuteur()) ?>" required>
 
             <label for="description">Commentaire</label>
-            <textarea id="description" name="description" rows="12"><?= htmlspecialchars($livre['description']) ?></textarea>
+            <textarea id="description" name="description" rows="12"><?= htmlspecialchars($livre->getDescription() ?? '') ?></textarea>
 
             <label for="disponible">Disponibilité</label>
             <select id="disponible" name="disponible">
-                <option value="1" <?= $livre['disponible'] ? 'selected' : '' ?>>disponible</option>
-                <option value="0" <?= !$livre['disponible'] ? 'selected' : '' ?>>non dispo.</option>
+                <option value="1" <?= $livre->isDisponible() ? 'selected' : '' ?>>disponible</option>
+                <option value="0" <?= !$livre->isDisponible() ? 'selected' : '' ?>>non dispo.</option>
             </select>
 
             <button type="submit" class="btn-primary">Valider</button>

@@ -38,7 +38,7 @@
                 <i class="fa-regular fa-user"></i>
                 Mon compte
             </a>
-            <?php if(isset($_SESSION['user'])): ?>
+            <?php if(isset($_SESSION['user_id'])): ?>
                 <a href="<?= BASE_URL ?>/deconnexion">Déconnexion</a>
             <?php else: ?>
                 <a href="<?= BASE_URL ?>/connexion">Connexion</a>

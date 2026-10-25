@@ -2,20 +2,22 @@
 namespace App\Controller;
 
 use App\Core\Route;
+use App\Entity\Book;
+use App\Manager\BookManager;
 
 class BookController extends AbstractController {
 
     #[Route('/livres')]
     public function index(): void {
-        $bookModel = new \App\Model\BookModel();
+        $bookManager = new BookManager();
 
         // Mot recherché dans l'URL, ex. /livres?search=wabi
         $search = trim($_GET['search'] ?? '');
 
         if ($search) {
-            $livres = $bookModel->search($search);
+            $livres = $bookManager->search($search);
         } else {
-            $livres = $bookModel->findAllWithUser();
+            $livres = $bookManager->findAllWithUser();
         }
 
         $this->render('book/index', [
@@ -26,8 +28,8 @@ class BookController extends AbstractController {
 
     #[Route('/livres/:id')]
     public function show(int $id): void {
-        $bookModel = new \App\Model\BookModel();
-        $livre = $bookModel->findByIdWithUser($id);
+        $bookManager = new BookManager();
+        $livre = $bookManager->findByIdWithUser($id);
 
         // Le livre n'existe pas : page 404
         if (!$livre) {
@@ -36,7 +38,7 @@ class BookController extends AbstractController {
 
         $this->render('book/show', [
             'livre'     => $livre,
-            'metaTitle' => $livre['titre'],
+            'metaTitle' => $livre->getTitre(),
             'user'      => $this->getUser(),
         ]);
     }
@@ -46,15 +48,14 @@ class BookController extends AbstractController {
         $this->requireLogin();
 
         if ($this->isPost()) {
-            $user = $this->getUser();
-            $bookModel = new \App\Model\BookModel();
-            $bookModel->create([
+            $bookManager = new BookManager();
+            $bookManager->create([
                 'titre'       => $_POST['titre'],
                 'auteur'      => $_POST['auteur'],
                 'description' => $_POST['description'],
                 'disponible'  => ($_POST['disponible'] ?? '0') === '1' ? 1 : 0,
                 'image'       => $this->uploadImage(),
-                'user_id'     => $user['id'],
+                'user_id'     => $this->getUser()->getId(),
             ]);
             $this->redirect('/mon-compte');
         } else {
@@ -71,8 +72,8 @@ class BookController extends AbstractController {
         $this->getLivreDuProprietaire($id);
 
         // Supprime le livre
-        $bookModel = new \App\Model\BookModel();
-        $bookModel->delete($id);
+        $bookManager = new BookManager();
+        $bookManager->delete($id);
 
         // Retour sur Mon compte
         $this->redirect('/mon-compte');
@@ -99,8 +100,8 @@ class BookController extends AbstractController {
                 $data['image'] = $image;
             }
 
-            $bookModel = new \App\Model\BookModel();
-            $bookModel->update($id, $data);
+            $bookManager = new BookManager();
+            $bookManager->update($id, $data);
             $this->redirect('/mon-compte');
         }
 
@@ -111,10 +112,9 @@ class BookController extends AbstractController {
     }
 
     // Récupère un livre et vérifie qu'il appartient à l'utilisateur connecté
-    private function getLivreDuProprietaire(int $id): array {
-        $bookModel = new \App\Model\BookModel();
-        $livre = $bookModel->findById($id);
-        $user = $this->getUser();
+    private function getLivreDuProprietaire(int $id): Book {
+        $bookManager = new BookManager();
+        $livre = $bookManager->findById($id);
 
         // Le livre n'existe pas : page 404
         if (!$livre) {
@@ -122,7 +122,7 @@ class BookController extends AbstractController {
         }
 
         // Le livre appartient à un autre utilisateur : retour à Mon compte
-        if ($livre['user_id'] != $user['id']) {
+        if ($livre->getUserId() !== $this->getUser()->getId()) {
             $this->redirect('/mon-compte');
         }
 

@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Core\Route;
+use App\Manager\MessageManager;
+use App\Manager\UserManager;
 
 class MessageController extends AbstractController {
 
@@ -9,13 +11,13 @@ class MessageController extends AbstractController {
     public function index(): void {
         $this->requireLogin();
         $user = $this->getUser();
-        $messageModel = new \App\Model\MessageModel();
-        $conversations = $messageModel->getConversations($user['id']);
+        $messageManager = new MessageManager();
+        $conversations = $messageManager->getConversations($user->getId());
 
         // Conversation la plus récente (null s'il n'y en a aucune)
-        $interlocuteurId = $conversations[0]['id'] ?? null;
-        $messages = $interlocuteurId ? $messageModel->findConversation($user['id'], $interlocuteurId) : [];
-        $interlocuteur = $interlocuteurId ? (new \App\Model\UserModel())->findById($interlocuteurId) : null;
+        $interlocuteurId = isset($conversations[0]) ? $conversations[0]->getInterlocuteurId() : null;
+        $messages = $interlocuteurId ? $messageManager->findConversation($user->getId(), $interlocuteurId) : [];
+        $interlocuteur = $interlocuteurId ? (new UserManager())->findById($interlocuteurId) : null;
 
         // Vue "liste" : sur mobile, seule la liste des conversations est affichée
         $this->render('message/show', [
@@ -33,7 +35,7 @@ class MessageController extends AbstractController {
         $this->requireLogin();
         $user = $this->getUser();
 
-        $interlocuteur = (new \App\Model\UserModel())->findById($id);
+        $interlocuteur = (new UserManager())->findById($id);
 
         // L'interlocuteur n'existe pas : page 404
         if (!$interlocuteur) {
@@ -41,31 +43,28 @@ class MessageController extends AbstractController {
         }
 
         // On ne peut pas s'écrire à soi-même : retour à la messagerie
-        if ($id === (int) $user['id']) {
+        if ($id === $user->getId()) {
             $this->redirect('/messages');
         }
 
-        $messageModel = new \App\Model\MessageModel();
+        $messageManager = new MessageManager();
 
         // Formulaire envoyé : on enregistre le message (s'il n'est pas vide)
         if ($this->isPost() && trim($_POST['contenu'] ?? '') !== '') {
-            $messageModel->create([
+            $messageManager->create([
                 'contenu'              => trim($_POST['contenu']),
                 'date_envoi'           => date('Y-m-d H:i:s'),
-                'user_id_expediteur'   => $user['id'],
+                'user_id_expediteur'   => $user->getId(),
                 'user_id_destinataire' => $id,
             ]);
 
             $this->redirect('/messages/' . $id);
         }
 
-        $conversations = $messageModel->getConversations($user['id']);
-        $messages = $messageModel->findConversation($user['id'], $id);
-
         // Vue "conversation" : sur mobile, seul le fil de discussion est affiché
         $this->render('message/show', [
-            'conversations'   => $conversations,
-            'messages'        => $messages,
+            'conversations'   => $messageManager->getConversations($user->getId()),
+            'messages'        => $messageManager->findConversation($user->getId(), $id),
             'user'            => $user,
             'interlocuteurId' => $id,
             'interlocuteur'   => $interlocuteur,

@@ -1,8 +1,8 @@
 <?php 
 /** @var string BASE_URL */
 /** @var string|null $error */
-/** @var array $user */
-/** @var array $livres */
+/** @var \App\Entity\User $user */
+/** @var \App\Entity\Book[] $livres */
 ?>
 
 <h1 class="compte-titre">Mon compte</h1>
@@ -11,14 +11,14 @@
     <!-- Partie gauche -->
     <div class="compte-profil">
         <div class="profil-photo">
-            <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($user['photo'] ?: 'img_profil.jpg') ?>" alt="Photo de profil">
+            <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($user->getPhotoOuDefaut()) ?>" alt="Photo de profil">
             <a href="#">modifier</a>
         </div>
 
         <hr class="profil-separateur">
 
-        <h2 class="profil-nom"><?= htmlspecialchars($user['prenom']) ?></h2>
-        <p class="membre-depuis">Membre depuis 1 an</p>
+        <h2 class="profil-nom"><?= htmlspecialchars($user->getPrenom()) ?></h2>
+        <p class="membre-depuis">Membre depuis <?= $user->getAnciennete() ?></p>
         <p class="bibliotheque-count">
             <span class="label">Bibliothèque</span><br>
             <i class="fa-solid fa-book-open"></i>
@@ -35,13 +35,13 @@
             <?php endif; ?>
 
             <label>Adresse email</label>
-            <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>">
+            <input type="email" name="email" value="<?= htmlspecialchars($user->getEmail()) ?>">
 
             <label>Mot de passe</label>
             <input type="password" name="password" placeholder="••••••••">
 
             <label>Pseudo</label>
-            <input type="text" name="pseudo" value="<?= htmlspecialchars($user['prenom']) ?>">
+            <input type="text" name="pseudo" value="<?= htmlspecialchars($user->getPrenom()) ?>">
 
             <button type="submit" class="btn-secondary">Enregistrer</button>
         </form>
@@ -68,18 +68,18 @@
         <tbody>
             <?php foreach($livres as $livre): ?>
             <tr>
-                <td class="col-photo"><img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>"></td>
-                <td class="col-titre"><?= htmlspecialchars($livre['titre']) ?></td>
-                <td class="col-auteur"><?= htmlspecialchars($livre['auteur']) ?></td>
-                <td class="col-description"><?= htmlspecialchars(mb_substr($livre['description'], 0, 80)) ?><?= mb_strlen($livre['description']) > 80 ? '…' : '' ?></td>         
+                <td class="col-photo"><img src="<?= bookImage($livre->getImage()) ?>" alt="<?= htmlspecialchars($livre->getTitre()) ?>"></td>
+                <td class="col-titre"><?= htmlspecialchars($livre->getTitre()) ?></td>
+                <td class="col-auteur"><?= htmlspecialchars($livre->getAuteur()) ?></td>
+                <td class="col-description"><?= htmlspecialchars($livre->getDescriptionCourte()) ?></td>         
                 <td class="col-dispo">
-                    <span class="badge <?= $livre['disponible'] ? 'badge-green' : 'badge-red' ?>">
-                        <?= $livre['disponible'] ? 'disponible' : 'non dispo.' ?>
+                    <span class="badge <?= $livre->isDisponible() ? 'badge-green' : 'badge-red' ?>">
+                        <?= $livre->isDisponible() ? 'disponible' : 'non dispo.' ?>
                     </span>
                 </td>
                 <td class="col-actions">
-                    <a href="<?= BASE_URL ?>/livre/editer/<?= $livre['id'] ?>" class="lien-editer">Éditer</a>
-                    <a href="<?= BASE_URL ?>/livre/supprimer/<?= $livre['id'] ?>" class="lien-supprimer"
+                    <a href="<?= BASE_URL ?>/livre/editer/<?= $livre->getId() ?>" class="lien-editer">Éditer</a>
+                    <a href="<?= BASE_URL ?>/livre/supprimer/<?= $livre->getId() ?>" class="lien-supprimer"
                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer</a>
                 </td>
             </tr>

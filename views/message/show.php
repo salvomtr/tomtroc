@@ -1,9 +1,9 @@
 <?php /** @var string BASE_URL */ ?>
-<?php /** @var array $conversations */ ?>
-<?php /** @var array $messages */ ?>
+<?php /** @var \App\Entity\Message[] $conversations */ ?>
+<?php /** @var \App\Entity\Message[] $messages */ ?>
 <?php /** @var int|null $interlocuteurId */ ?>
-<?php /** @var array|null $interlocuteur */ ?>
-<?php /** @var array $user */ ?>
+<?php /** @var \App\Entity\User|null $interlocuteur */ ?>
+<?php /** @var \App\Entity\User $user */ ?>
 <?php /** @var string $vue */ ?>
 
 
@@ -13,17 +13,17 @@
     <div class="messagerie-liste">
         <h1>Messagerie</h1>
         <?php foreach($conversations as $conversation): ?>
-            <a href="<?= BASE_URL ?>/messages/<?= $conversation['id'] ?>"
-               class="conversation-item <?= $conversation['id'] == $interlocuteurId ? 'active' : '' ?>">
+            <a href="<?= BASE_URL ?>/messages/<?= $conversation->getInterlocuteurId() ?>"
+               class="conversation-item <?= $conversation->getInterlocuteurId() === $interlocuteurId ? 'active' : '' ?>">
                 <div class="conversation-avatar">
-                    <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($conversation['photo'] ?: 'img_profil.jpg') ?>" alt="<?= htmlspecialchars($conversation['prenom']) ?>">
+                    <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($conversation->getInterlocuteurPhoto() ?: 'img_profil.jpg') ?>" alt="<?= htmlspecialchars($conversation->getInterlocuteurPrenom()) ?>">
                 </div>
                 <div class="conversation-info">
                     <div class="conversation-header">
-                        <span class="conversation-nom"><?= htmlspecialchars($conversation['prenom']) ?></span>
-                        <span class="conversation-date"><?= date('H:i', strtotime($conversation['date_envoi'])) ?></span>
+                        <span class="conversation-nom"><?= htmlspecialchars($conversation->getInterlocuteurPrenom()) ?></span>
+                        <span class="conversation-date"><?= date('H:i', strtotime($conversation->getDateEnvoi())) ?></span>
                     </div>
-                    <p class="conversation-preview"><?= htmlspecialchars($conversation['contenu']) ?></p>
+                    <p class="conversation-preview"><?= htmlspecialchars($conversation->getContenu()) ?></p>
                 </div>
             </a>
         <?php endforeach; ?>
@@ -39,8 +39,8 @@
 
         <?php if ($interlocuteur): ?>
             <div class="conversation-entete">
-                <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($interlocuteur['photo'] ?: 'img_profil.jpg') ?>" alt="<?= htmlspecialchars($interlocuteur['prenom']) ?>">
-                <span><?= htmlspecialchars($interlocuteur['prenom']) ?></span>
+                <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($interlocuteur->getPhotoOuDefaut()) ?>" alt="<?= htmlspecialchars($interlocuteur->getPrenom()) ?>">
+                <span><?= htmlspecialchars($interlocuteur->getPrenom()) ?></span>
             </div>
         <?php endif; ?>
 
@@ -51,13 +51,13 @@
         <?php else: ?>
             <div class="fil-messages">
                 <?php foreach($messages as $message): ?>
-                    <div class="message <?= $message['user_id_expediteur'] == $user['id'] ? 'message-envoye' : 'message-recu' ?>">
-                        <p class="message-contenu"><?= htmlspecialchars($message['contenu']) ?></p>
+                    <div class="message <?= $message->estEnvoyePar($user->getId()) ? 'message-envoye' : 'message-recu' ?>">
+                        <p class="message-contenu"><?= htmlspecialchars($message->getContenu()) ?></p>
                         <div class="message-meta">
-                            <?php if ($message['user_id_expediteur'] != $user['id']): ?>
-                                <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($interlocuteur['photo'] ?: 'img_profil.jpg') ?>" alt="">
+                            <?php if (!$message->estEnvoyePar($user->getId())): ?>
+                                <img src="<?= BASE_URL ?>/public/img/<?= htmlspecialchars($interlocuteur->getPhotoOuDefaut()) ?>" alt="">
                             <?php endif; ?>
-                            <span class="message-date"><?= date('d.m H:i', strtotime($message['date_envoi'])) ?></span>
+                            <span class="message-date"><?= date('d.m H:i', strtotime($message->getDateEnvoi())) ?></span>
                         </div>
                     </div>
                 <?php endforeach; ?>

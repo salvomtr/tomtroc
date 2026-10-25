@@ -1,5 +1,5 @@
 <?php /** @var string BASE_URL */ ?>
-<?php /** @var array $livres */ ?>
+<?php /** @var \App\Entity\Book[] $livres */ ?>
 <?php /** @var string $search */ ?>
 
 <div class="livres-header">
@@ -19,12 +19,12 @@
 
 <div class="livres-grid">
     <?php foreach($livres as $livre): ?>
-        <a href="<?= BASE_URL ?>/livres/<?= $livre['id'] ?>">
+        <a href="<?= BASE_URL ?>/livres/<?= $livre->getId() ?>">
             <div class="livre-card">
-                <img src="<?= bookImage($livre['image']) ?>" alt="<?= htmlspecialchars($livre['titre']) ?>">
-                <h3><?= htmlspecialchars($livre['titre']) ?></h3>
-                <p><?= htmlspecialchars($livre['auteur']) ?></p>
-                <p class="vendu-par">Vendu par : <?= htmlspecialchars($livre['prenom'] ?? '') ?></p>
+                <img src="<?= bookImage($livre->getImage()) ?>" alt="<?= htmlspecialchars($livre->getTitre()) ?>">
+                <h3><?= htmlspecialchars($livre->getTitre()) ?></h3>
+                <p><?= htmlspecialchars($livre->getAuteur()) ?></p>
+                <p class="vendu-par">Vendu par : <?= htmlspecialchars($livre->getProprietairePrenom() ?? '') ?></p>
             </div>
         </a>
     <?php endforeach; ?>
