@@ -1110,15 +1110,120 @@ footer nav a {
 }
 
 /* ==== RESPONSIVE ==== */
-@media (max-width: 600px) {
+
+/* ---- Tablette paysage et petits écrans (jusqu'à 1024px) ---- */
+@media (max-width: 1024px) {
 
     main {
-        padding: 30px 20px;
+        padding: 40px 30px;
     }
 
     header {
+        padding: 20px 30px;
+    }
+
+    .derniers-livres {
+        margin: 0 -30px;
+        padding: 50px 30px;
+    }
+
+    .hero {
+        padding: 40px 0;
+        gap: 40px;
+    }
+
+    .hero-text {
+        width: 50%;
+    }
+
+    .hero-text h1 {
+        font-size: 40px;
+    }
+
+    .hero-image {
+        width: 50%;
+    }
+
+    .livres-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    /* Accueil : 4 livres, on garde 4 colonnes */
+    .derniers-livres .livres-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .etapes {
+        gap: 20px;
+    }
+
+    .etape {
+        width: auto;
+        flex: 1;
+    }
+
+    .livre-show {
+        margin: 0 -30px -40px;
+    }
+
+    .livre-show-content {
+        padding: 40px;
+    }
+
+    .livres-table th {
+        padding: 25px 15px;
+    }
+
+    .livres-table td {
+        padding: 25px 15px;
+    }
+
+    .livres-table img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .livres-table .col-description {
+        width: auto;
+    }
+
+    .livre-form {
+        gap: 40px;
+        padding: 40px;
+    }
+
+    .auth-page,
+    .messagerie {
+        margin: -40px -30px;
+    }
+
+    .auth-form {
+        padding: 80px 40px;
+    }
+
+    .messagerie-liste {
+        flex-basis: 260px;
+    }
+
+    .messagerie-conversation {
+        min-width: 0;
+        padding: 30px;
+    }
+
+    .message-form textarea {
+        min-width: 0;
+    }
+
+    .message {
+        max-width: 80%;
+    }
+}
+
+/* ---- Tablette portrait (jusqu'à 900px) : menu burger, colonnes empilées ---- */
+@media (max-width: 900px) {
+
+    header {
         position: relative;
-        padding: 20px;
     }
 
     .header-left nav,
@@ -1148,6 +1253,78 @@ footer nav a {
 
     .burger {
         display: flex;
+    }
+
+    .derniers-livres h2 {
+        margin-top: 40px;
+        margin-bottom: 60px;
+    }
+
+    /* Accueil : 4 livres sur 2 lignes de 2 */
+    .derniers-livres .livres-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .etapes {
+        flex-wrap: wrap;
+    }
+
+    .etape {
+        flex: 1 1 40%;
+    }
+
+    .livre-show {
+        flex-direction: column;
+    }
+
+    .livre-show-image,
+    .livre-show-content {
+        width: 100%;
+    }
+
+    .livre-show-image img {
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+
+    .profil-public {
+        flex-direction: column;
+    }
+
+    .profil-public .compte-profil {
+        flex: none;
+    }
+
+    .auth-form {
+        width: 60%;
+        padding: 60px 30px;
+    }
+
+    .auth-image {
+        width: 40%;
+    }
+
+    .messagerie-liste {
+        flex-basis: 220px;
+    }
+
+    .message-form {
+        flex-direction: column;
+    }
+
+    .message-form .btn-primary {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 600px) {
+
+    main {
+        padding: 30px 20px;
+    }
+
+    header {
+        padding: 20px;
     }
 
     .hero {
