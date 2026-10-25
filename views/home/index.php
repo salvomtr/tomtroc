@@ -19,7 +19,8 @@
         <?php foreach($derniers_livres as $livre): ?>
             <a href="<?= BASE_URL ?>/livres/<?= $livre->getId() ?>">
                 <div class="livre-card">
-                    <img src="<?= bookImage($livre->getImage()) ?>" alt="<?= htmlspecialchars($livre->getTitre()) ?>">
+                    <!-- alt vide : le titre est déjà écrit juste en dessous dans le lien -->
+                    <img src="<?= bookImage($livre->getImage()) ?>" alt="">
                     <h3><?= htmlspecialchars($livre->getTitre()) ?></h3>
                     <p><?= htmlspecialchars($livre->getAuteur()) ?></p>
                     <p class="vendu-par">Vendu par : <?= htmlspecialchars($livre->getProprietairePrenom()) ?></p>
@@ -53,6 +54,6 @@
     <p>Nous sommes passionnés par la création d'une plateforme conviviale qui permet aux lecteurs de se connecter, de partager leurs découvertes littéraires et d'échanger des livres qui attendent patiemment sur les étagères.</p>
     <div class="signature-row">
         <p class="signature">L'équipe Tom Troc</p>
-        <img src="<?= BASE_URL ?>/public/img/heart.png" alt="coeur">
+        <img src="<?= BASE_URL ?>/public/img/heart.png" alt="">
     </div>
 </section>

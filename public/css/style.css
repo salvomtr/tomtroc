@@ -38,7 +38,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-    outline: 2px solid #3D9B6B;
+    outline: 2px solid #2d7a52;
     outline-offset: 2px;
 }
 
@@ -95,7 +95,7 @@ header nav {
 }
 
 header a:hover {
-    color: #3D9B6B;
+    color: #2d7a52;
 }
 
 .fa-comment {
@@ -121,7 +121,7 @@ header a:hover {
 
 /* ==== LOGO ==== */
 .logo {
-    color: #3D9B6B;
+    color: #2d7a52;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -131,7 +131,7 @@ header a:hover {
 }
 
 .logo-icon {
-    background-color: #3D9B6B;
+    background-color: #2d7a52;
     color: white;
     padding: 8px 10px;
     border-radius: 8px;
@@ -152,7 +152,7 @@ header a:hover {
 .btn-primary {
     display: inline-block;
     width: fit-content;
-    background-color: #3D9B6B;
+    background-color: #2d7a52;
     color: white !important;
     padding: 15px 30px;
     border-radius: 5px;
@@ -163,15 +163,15 @@ header a:hover {
 }
 
 .btn-primary:hover {
-    background-color: #2d7a52;
+    background-color: #236141;
 }
 
 .btn-secondary {
     display: inline-block;
     width: fit-content;
     background-color: transparent;
-    color: #3D9B6B;
-    border: 1px solid #3D9B6B;
+    color: #2d7a52;
+    border: 1px solid #2d7a52;
     padding: 15px 30px;
     border-radius: 5px;
     cursor: pointer;
@@ -180,7 +180,7 @@ header a:hover {
 }
 
 .btn-secondary:hover {
-    background-color: #3D9B6B;
+    background-color: #2d7a52;
     color: white;
 }
 
@@ -253,6 +253,7 @@ header a:hover {
     object-fit: cover;
 }
 
+.livre-card h2,
 .livre-card h3 {
     padding: 10px 10px 4px;
     font-size: 20px;
@@ -261,7 +262,7 @@ header a:hover {
 .livre-card p {
     padding: 10px 10px 5px;
     font-size: 16px;
-    color: #888;
+    color: #6B6B6B;
 }
 
 .livre-card .vendu-par {
@@ -284,7 +285,7 @@ header a:hover {
 }
 
 .comment-ca-marche > p {
-    color: #888;
+    color: #6B6B6B;
     max-width: 400px;
     margin: 0 auto 40px;
 }
@@ -338,7 +339,7 @@ header a:hover {
 }
 
 .nos-valeurs .signature {
-    color: #bbb;
+    color: #6B6B6B;
     font-size: 12px;
 }
 
@@ -375,7 +376,7 @@ header a:hover {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #aaa;
+    color: #6B6B6B;
     font-size: 14px;
 }
 
@@ -389,18 +390,18 @@ header a:hover {
 }
 
 .search-bar input::placeholder {
-    color: #aaa;
+    color: #6B6B6B;
 }
 
 /* ==== LIVRE SHOW ==== */
 .fil-ariane {
     font-size: 11px;
-    color: #aaa;
+    color: #6B6B6B;
     margin: -30px 0 15px;
 }
 
 .fil-ariane a:hover {
-    color: #3D9B6B;
+    color: #2d7a52;
 }
 
 .livre-show {
@@ -432,7 +433,7 @@ header a:hover {
 }
 
 .livre-auteur {
-    color: #aaa;
+    color: #6B6B6B;
 }
 
 .livre-separateur {
@@ -443,7 +444,7 @@ header a:hover {
 }
 
 .label {
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -476,7 +477,7 @@ header a:hover {
 }
 
 .proprietaire:hover {
-    color: #3D9B6B;
+    color: #2d7a52;
 }
 
 .btn-message {
@@ -525,7 +526,7 @@ header a:hover {
 }
 
 .membre-depuis {
-    color: #888;
+    color: #6B6B6B;
     font-size: 20px;
     margin-top: 5px;
 }
@@ -557,7 +558,7 @@ header a:hover {
 .compte-infos label {
     display: block;
     font-size: 14px;    
-    color: #888;
+    color: #6B6B6B;
     margin-bottom: 4px;
 }
 
@@ -603,10 +604,6 @@ header a:hover {
     font-size: 36px;
 }
 
-.profil-public .bibliotheque-count .label {
-    font-size: 8px;
-}
-
 .btn-ecrire {
     margin-top: 30px;
     font-size: 14px;
@@ -640,7 +637,7 @@ header a:hover {
     text-align: left;
     padding: 35px 30px;
     font-size: 12px;
-    color: #888;
+    color: #6B6B6B;
     border-bottom: 1px solid #ddd;
     text-transform: uppercase;
 }
@@ -671,12 +668,12 @@ header a:hover {
 }
 
 .badge-green {
-    background-color: #3D9B6B;
+    background-color: #2d7a52;
     color: white;
 }
 
 .badge-red {
-    background-color: #C96A6A;
+    background-color: #B03A35;
     color: white;
 }
 
@@ -688,7 +685,7 @@ header a:hover {
 }
 
 .livres-table .lien-supprimer {
-    color: #D9534F;
+    color: #B03A35;
     text-decoration: underline;
     font-size: 14px;
 }
@@ -748,7 +745,7 @@ header a:hover {
 .auth-form label {
     display: block;
     font-size: 12px;
-    color: #888;
+    color: #6B6B6B;
     margin-bottom: 4px;
 }
 
@@ -768,11 +765,11 @@ header a:hover {
 
 .auth-form p {
     font-size: 13px;
-    color: #888;
+    color: #6B6B6B;
 }
 
 .auth-form p a {
-    color: #3D9B6B;
+    color: #2d7a52;
     text-decoration: underline;
 }
 
@@ -797,13 +794,13 @@ header a:hover {
 /* ==== FORMULAIRE LIVRE ==== */
 .lien-retour {
     display: inline-block;
-    color: #888;
+    color: #6B6B6B;
     font-size: 14px;
     margin-bottom: 20px;
 }
 
 .lien-retour:hover {
-    color: #3D9B6B;
+    color: #2d7a52;
 }
 
 .compte-titre,
@@ -842,7 +839,7 @@ header a:hover {
 .livre-form label,
 .livre-form .label-photo {
     font-size: 12px;
-    color: #888;
+    color: #6B6B6B;
     margin-top: 10px;
 }
 
@@ -855,7 +852,7 @@ header a:hover {
 
 /* Contour visible quand le champ photo reçoit le focus au clavier */
 .livre-form .visually-hidden:focus-visible + .lien-photo {
-    outline: 2px solid #3D9B6B;
+    outline: 2px solid #2d7a52;
     outline-offset: 3px;
 }
 
@@ -937,12 +934,12 @@ header a:hover {
 
 .conversation-date {
     font-size: 12px;
-    color: #888;
+    color: #6B6B6B;
 }
 
 .conversation-preview {
     font-size: 13px;
-    color: #888;
+    color: #6B6B6B;
     margin-top: 4px;
     white-space: nowrap;
     overflow: hidden;
@@ -958,7 +955,7 @@ header a:hover {
 
 .messagerie-empty {
     margin: auto;
-    color: #888;
+    color: #6B6B6B;
 }
 
 .fil-messages {
@@ -997,7 +994,7 @@ header a:hover {
 
 .message-date {
     font-size: 11px;
-    color: #aaa;
+    color: #6B6B6B;
 }
 
 .conversation-entete {
@@ -1034,13 +1031,13 @@ header a:hover {
 
 .messagerie-liste-vide {
     padding: 0 20px;
-    color: #888;
+    color: #6B6B6B;
     font-size: 14px;
 }
 
 .messagerie-retour {
     display: none;
-    color: #888;
+    color: #6B6B6B;
     font-size: 14px;
     margin-bottom: 20px;
 }
@@ -1081,7 +1078,7 @@ header a:hover {
     font-family: 'Playfair Display', serif;
     font-size: 120px;
     line-height: 1;
-    color: #3D9B6B;
+    color: #2d7a52;
 }
 
 .erreur-404 h1 {

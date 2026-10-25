@@ -21,8 +21,9 @@
     <?php foreach($livres as $livre): ?>
         <a href="<?= BASE_URL ?>/livres/<?= $livre->getId() ?>">
             <div class="livre-card">
-                <img src="<?= bookImage($livre->getImage()) ?>" alt="<?= htmlspecialchars($livre->getTitre()) ?>">
-                <h3><?= htmlspecialchars($livre->getTitre()) ?></h3>
+                <!-- alt vide : le titre est déjà écrit juste en dessous dans le lien -->
+                <img src="<?= bookImage($livre->getImage()) ?>" alt="">
+                <h2><?= htmlspecialchars($livre->getTitre()) ?></h2>
                 <p><?= htmlspecialchars($livre->getAuteur()) ?></p>
                 <p class="vendu-par">Vendu par : <?= htmlspecialchars($livre->getProprietairePrenom() ?? '') ?></p>
             </div>

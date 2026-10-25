@@ -13,7 +13,7 @@
 
         <hr class="profil-separateur">
 
-        <h2 class="profil-nom"><?= htmlspecialchars($profil->getPrenom()) ?></h2>
+        <h1 class="profil-nom"><?= htmlspecialchars($profil->getPrenom()) ?></h1>
         <p class="membre-depuis">Membre depuis <?= $profil->getAnciennete() ?></p>
         <p class="bibliotheque-count">
             <span class="label">Bibliothèque</span><br>
@@ -45,9 +45,7 @@
                         <?php foreach ($livres as $livre): ?>
                         <tr>
                             <td class="col-photo">
-                                <a href="<?= BASE_URL ?>/livres/<?= $livre->getId() ?>">
-                                    <img src="<?= bookImage($livre->getImage()) ?>" alt="<?= htmlspecialchars($livre->getTitre()) ?>">
-                                </a>
+                                <img src="<?= bookImage($livre->getImage()) ?>" alt="">
                             </td>
                             <td class="col-titre">
                                 <a href="<?= BASE_URL ?>/livres/<?= $livre->getId() ?>"><?= htmlspecialchars($livre->getTitre()) ?></a>
