@@ -27,8 +27,27 @@ abstract class AbstractController {
     }
 
     // Vérifie si la requête est en POST (formulaire envoyé)
+    // Un formulaire POST n'est accepté que s'il contient le bon jeton CSRF
     protected function isPost(): bool {
-        return $_SERVER['REQUEST_METHOD'] === 'POST';
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return false;
+        }
+
+        $this->verifierCsrf();
+        return true;
+    }
+
+    // Protection CSRF : le jeton envoyé doit être identique à celui de la session
+    // Un autre site ne connaît pas ce jeton, il ne peut donc pas envoyer
+    // un formulaire à la place de l'utilisateur
+    private function verifierCsrf(): void {
+        $jeton = $_POST['csrf_token'] ?? '';
+
+        if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $jeton)) {
+            http_response_code(403);
+            $this->render('error/403', ['metaTitle' => 'Requête refusée']);
+            exit;
+        }
     }
 
     // Redirige vers une autre URL et arrête le script
