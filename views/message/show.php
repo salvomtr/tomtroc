@@ -66,7 +66,8 @@
 
         <?php if ($interlocuteurId !== null): ?>
             <form method="POST" action="<?= BASE_URL ?>/messages/<?= $interlocuteurId ?>" class="message-form">
-                <textarea name="contenu" placeholder="Tapez votre message ici" required></textarea>
+                <?= csrfField() ?>
+                <textarea name="contenu" placeholder="Tapez votre message ici" aria-label="Votre message" required></textarea>
                 <button type="submit" class="btn-primary">Envoyer</button>
             </form>
         <?php endif; ?>

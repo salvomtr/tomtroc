@@ -12,14 +12,15 @@
         <?php endif; ?>
 
         <form method="POST" action="<?= BASE_URL ?>/inscription">
-            <label>Pseudo</label>
-            <input type="text" name="prenom" value="<?= htmlspecialchars($prenom ?? '') ?>" required>
+            <?= csrfField() ?>
+            <label for="prenom">Pseudo</label>
+            <input type="text" id="prenom" name="prenom" value="<?= htmlspecialchars($prenom ?? '') ?>" required>
 
-            <label>Adresse email</label>
-            <input type="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" required>
+            <label for="email">Adresse email</label>
+            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" required>
 
-            <label>Mot de passe</label>
-            <input type="password" name="password" required>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required>
 
             <button type="submit" class="btn-primary">S'inscrire</button>
         </form>

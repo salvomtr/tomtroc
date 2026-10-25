@@ -10,11 +10,12 @@
         <?php endif; ?>
 
         <form method="POST" action="<?= BASE_URL ?>/connexion">
-            <label>Adresse email</label>
-            <input type="email" name="email" required>
+            <?= csrfField() ?>
+            <label for="email">Adresse email</label>
+            <input type="email" id="email" name="email" required>
 
-            <label>Mot de passe</label>
-            <input type="password" name="password" required>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required>
 
             <button type="submit" class="btn-primary">Se connecter</button>
         </form>

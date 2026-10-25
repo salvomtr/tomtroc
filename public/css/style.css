@@ -194,7 +194,7 @@ header a:hover {
     background-color: white;
     text-align: center;
     padding: 60px 50px;
-    margin: 0 -50px; /* compensa il padding di main */
+    margin: 0 -50px; /* compense le padding de main */
 }
 
 .derniers-livres h2 {
@@ -672,6 +672,20 @@ header a:hover {
     color: #D9534F;
     text-decoration: underline;
     font-size: 14px;
+}
+
+
+/* Bouton Supprimer : formulaire POST affiché comme un lien */
+.livres-table .form-supprimer {
+    display: inline;
+}
+
+.livres-table .form-supprimer button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
 }
 
 .livres-table .col-description {
@@ -1257,6 +1271,8 @@ footer nav a {
         font-size: 16px;
         margin-right: 0;
     }
+
+
 
     .comment-ca-marche,
     .nos-valeurs {

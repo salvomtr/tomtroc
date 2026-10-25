@@ -30,18 +30,19 @@
     <div class="compte-infos">
         <h3>Vos informations personnelles</h3>
         <form method="POST" action="<?= BASE_URL ?>/mon-compte">
+            <?= csrfField() ?>
             <?php if (!empty($error)): ?>
                 <p class="form-error"><?= htmlspecialchars($error) ?></p>
             <?php endif; ?>
 
-            <label>Adresse email</label>
-            <input type="email" name="email" value="<?= htmlspecialchars($user->getEmail()) ?>">
+            <label for="email">Adresse email</label>
+            <input type="email" id="email" name="email" value="<?= htmlspecialchars($user->getEmail()) ?>">
 
-            <label>Mot de passe</label>
-            <input type="password" name="password" placeholder="••••••••">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" placeholder="••••••••">
 
-            <label>Pseudo</label>
-            <input type="text" name="pseudo" value="<?= htmlspecialchars($user->getPrenom()) ?>">
+            <label for="pseudo">Pseudo</label>
+            <input type="text" id="pseudo" name="pseudo" value="<?= htmlspecialchars($user->getPrenom()) ?>">
 
             <button type="submit" class="btn-secondary">Enregistrer</button>
         </form>
@@ -79,8 +80,12 @@
                 </td>
                 <td class="col-actions">
                     <a href="<?= BASE_URL ?>/livre/editer/<?= $livre->getId() ?>" class="lien-editer">Éditer</a>
-                    <a href="<?= BASE_URL ?>/livre/supprimer/<?= $livre->getId() ?>" class="lien-supprimer"
-                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer</a>
+                    <!-- Suppression avec un formulaire POST et le jeton CSRF -->
+                    <form method="POST" action="<?= BASE_URL ?>/livre/supprimer/<?= $livre->getId() ?>" class="form-supprimer"
+                          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+                        <?= csrfField() ?>
+                        <button type="submit" class="lien-supprimer">Supprimer</button>
+                    </form>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -1,5 +1,6 @@
 <?php /** @var string BASE_URL */ ?>
 <?php /** @var \App\Entity\Book $livre */ ?>
+<?php /** @var string|null $error */ ?>
 
 <div class="livre-form-page">
     <a href="<?= BASE_URL ?>/mon-compte" class="lien-retour">← retour</a>
@@ -7,6 +8,7 @@
     <h1 class="livre-form-titre">Modifier les informations</h1>
 
     <form method="POST" action="" enctype="multipart/form-data" class="livre-form">
+        <?= csrfField() ?>
 
         <!-- Colonne gauche : photo -->
         <div class="livre-form-photo">
@@ -18,14 +20,18 @@
 
         <!-- Colonne droite : champs -->
         <div class="livre-form-champs">
+            <?php if (!empty($error)): ?>
+                <p class="form-error"><?= htmlspecialchars($error) ?></p>
+            <?php endif; ?>
+
             <label for="titre">Titre</label>
-            <input type="text" id="titre" name="titre" value="<?= htmlspecialchars($livre->getTitre()) ?>" required>
+            <input type="text" id="titre" name="titre" value="<?= htmlspecialchars($livre->getTitre()) ?>" maxlength="255" required>
 
             <label for="auteur">Auteur</label>
-            <input type="text" id="auteur" name="auteur" value="<?= htmlspecialchars($livre->getAuteur()) ?>" required>
+            <input type="text" id="auteur" name="auteur" value="<?= htmlspecialchars($livre->getAuteur()) ?>" maxlength="255" required>
 
             <label for="description">Commentaire</label>
-            <textarea id="description" name="description" rows="12"><?= htmlspecialchars($livre->getDescription() ?? '') ?></textarea>
+            <textarea id="description" name="description" rows="12" maxlength="5000"><?= htmlspecialchars($livre->getDescription() ?? '') ?></textarea>
 
             <label for="disponible">Disponibilité</label>
             <select id="disponible" name="disponible">

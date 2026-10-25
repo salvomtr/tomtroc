@@ -1,24 +1,4 @@
 <?php
-function dump(...$vars): void
-{
-    foreach ($vars as $var) {
-        $var = is_string($var) ? htmlspecialchars($var) : $var;
-        $debug = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-        $debug = array_reverse($debug);
-        $file = $debug[0]['file'];
-        $line = $debug[0]['line'];
-        echo '<pre style="background-color: #333; color: white; padding: 4px; margin: 8px 0">';
-        echo $file . ':' . $line . '<br>';
-        var_dump($var);
-        echo '</pre>';
-    }
-}
-
-function dd(...$vars): void
-{
-    dump(...$vars);
-    die;
-}
 
 // Retourne l'URL de l'image d'un livre, ou l'image par défaut si elle est vide
 function bookImage(?string $image): string
@@ -28,4 +8,21 @@ function bookImage(?string $image): string
     }
 
     return BASE_URL . '/public/img/' . htmlspecialchars($image);
+}
+
+// Retourne le jeton CSRF de la session (il est créé la première fois)
+// Le jeton est une chaîne aléatoire que seul notre site connaît
+function csrfToken(): string
+{
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    return $_SESSION['csrf_token'];
+}
+
+// Champ caché à placer dans chaque formulaire POST
+function csrfField(): string
+{
+    return '<input type="hidden" name="csrf_token" value="' . csrfToken() . '">';
 }
