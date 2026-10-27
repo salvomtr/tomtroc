@@ -80,8 +80,9 @@ Il y a déjà des messages entre ces comptes pour tester la messagerie.
 
 - `index.php` : c'est le point d'entrée, toutes les pages passent par ce fichier
 - `Core/` : le routeur, qui regarde l'URL et appelle le bon contrôleur
-- `Controller/` : les contrôleurs (accueil, livres, utilisateurs, messages)
-- `Model/` : les modèles, qui font les requêtes SQL
+- `Controller/` : les contrôleurs (accueil, livres, utilisateurs, messages, erreurs)
+- `Entity/` : les entités (User, Book, Message), avec leurs propriétés privées, leurs getters et leurs setters
+- `Manager/` : les managers, qui font les requêtes SQL et transforment chaque résultat en entité (hydratation)
 - `views/` : les vues, c'est-à-dire le HTML des pages
 - `public/` : le CSS, le JavaScript et les images
 - `config/` : l'autoload des classes et la connexion à la base
@@ -89,11 +90,25 @@ Il y a déjà des messages entre ces comptes pour tester la messagerie.
 
 Pour les routes, j'ai utilisé les attributs de PHP 8. Par exemple `#[Route('/livres/:id')]` au-dessus d'une méthode veut dire que cette méthode s'occupe de l'URL `/livres/1`, `/livres/2`, etc.
 
+Si une page, un livre ou un membre n'existe pas, le site affiche une page 404 avec le bon code HTTP.
+
 ## Sécurité
 
 J'ai fait attention à :
 
 - hacher les mots de passe avec `password_hash()`
+- appeler `session_regenerate_id()` à la connexion et ne garder que l'id de l'utilisateur en session
 - utiliser des requêtes préparées pour éviter les injections SQL
 - utiliser `htmlspecialchars()` quand j'affiche des données, pour éviter les failles XSS
+- protéger chaque formulaire avec un jeton CSRF
+- supprimer un livre uniquement avec un formulaire en POST
+- vérifier que l'utilisateur est bien le propriétaire d'un livre avant de le modifier ou de le supprimer
+- valider les formulaires côté serveur (champs obligatoires, longueur, type et taille de l'image)
+- supprimer l'ancienne image du disque quand on modifie ou supprime un livre
 
+## Accessibilité
+
+- chaque champ de formulaire a un `label`
+- le menu burger utilise `aria-expanded` et `aria-label`
+- le champ photo est utilisable au clavier
+- les couleurs respectent un contraste suffisant (WCAG AA), vérifié avec l'extension WAVE
